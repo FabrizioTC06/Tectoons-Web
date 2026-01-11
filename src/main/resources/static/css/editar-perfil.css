@@ -1,0 +1,45 @@
+/* Tarjeta */
+        .edit-profile-card {
+            background: #ffffff;
+            border: none;
+            overflow: hidden;
+        }
+
+        /* Header */
+        .edit-profile-header {
+            background: linear-gradient(135deg, #0062cc, #004a99);
+            padding: 18px 25px;
+        }
+
+        /* Foto flotante */
+        .profile-edit-img-wrapper {
+            width: 140px;
+            height: 140px;
+        }
+
+        .profile-edit-img {
+            width: 140px;
+            height: 140px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 5px solid #fff;
+        }
+
+        /* Inputs */
+        .form-control {
+            border-radius: 10px;
+        }
+
+        .form-control:focus {
+            box-shadow: none;
+            border-color: #2b8eff;
+        }
+
+        /* Botones */
+        .btn-lg {
+            border-radius: 12px;
+        }
+
+        .btn-outline-secondary:hover {
+            background: #ddd;
+        }

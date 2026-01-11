@@ -1,0 +1,158 @@
+/* ============================================================
+   CARD BASE – IGUAL ALTURA Y ESTILO PREMIUM
+   ============================================================ */
+.artist-card {
+    background: #ffffff;
+    border-radius: 20px;
+    padding-bottom: 15px;
+    overflow: hidden;
+    border: 1px solid #e5e8f0;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
+    transition: all 0.25s ease;
+    
+    display: flex;
+    flex-direction: column;
+    height: 100%;            /* ✔ MISMA ALTURA */
+}
+
+.artist-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 14px 32px rgba(0, 0, 0, 0.12);
+}
+
+/* ============================================================
+   FOTO DE PERFIL ARTISTA
+   ============================================================ */
+.artist-img-wrapper {
+    position: relative;
+    width: 100%;
+    height: 230px;
+    border-radius: 20px 20px 0 0;
+    overflow: hidden;
+    background: #f4f5ff;
+}
+
+.artist-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;     /* ✔ MEJOR ARTE QUE CONTAIN */
+    transition: transform 0.35s ease;
+}
+
+.artist-card:hover .artist-img {
+    transform: scale(1.08);
+}
+
+/* TAG CATEGORÍA */
+.artist-tag {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    background: #3b63f6;
+    color: #ffffff;
+    padding: 6px 12px;
+    border-radius: 10px;
+    font-size: 0.78rem;
+    font-weight: 500;
+    box-shadow: 0 4px 10px rgba(59, 99, 246, 0.35);
+}
+
+/* ============================================================
+   TEXTO INTERIOR
+   ============================================================ */
+.card-body {
+    padding: 18px 20px 0 20px;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+.artist-title {
+    font-size: 1.28rem;
+    font-weight: 700;
+    color: #2a2d3a;
+    margin-top: 12px;
+    text-transform: capitalize;
+}
+
+.artist-bio {
+    color: #6b7280;
+    font-size: 0.9rem;
+    margin-bottom: 18px;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+    line-clamp: 3;  /* ✔ MÁXIMO 3 LÍNEAS */
+    overflow: hidden;
+    min-height: 60px;        /* ✔ AYUDA A ALTURAS IGUALES */
+}
+
+/* ============================================================
+   BOTONES
+   ============================================================ */
+.btn-detail {
+    flex: 1;
+    background: #e9efff;
+    border: 1px solid #cddaff;
+    color: #2f54eb;
+    padding: 8px 0;
+    border-radius: 12px;
+    font-weight: 600;
+    transition: all 0.25s ease;
+}
+
+.btn-detail:hover {
+    background: #dbe6ff;
+    transform: translateY(-2px);
+}
+
+/* Botón Seguir */
+.btn-follow {
+    background: #ffffff;
+    border: 1px solid #d5d8de;
+    color: #444;
+    padding: 8px 16px;
+    border-radius: 12px;
+    font-weight: 600;
+    white-space: nowrap;
+    transition: 0.25s ease;
+}
+
+.btn-follow:hover {
+    background: #f1f3f5;
+    transform: translateY(-2px);
+}
+
+/* BOTÓN SIGUIENDO */
+.btn-follow.following {
+    background: #4caf50;
+    border-color: #4caf50;
+    color: white;
+    box-shadow: 0 5px 15px rgba(76, 175, 80, 0.4);
+}
+
+.btn-follow.following:hover {
+    background: #449d48;
+}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media (max-width: 576px) {
+    .artist-img-wrapper {
+        height: 180px;
+    }
+
+    .btn-detail,
+    .btn-follow {
+        width: 100%;
+    }
+}
+
+/* ============================================================
+   EFECTO GLASS PARA HACERLO MÁS PREMIUM
+   ============================================================ */
+.artist-card:hover {
+    background: rgba(255, 255, 255, 0.92);
+    backdrop-filter: blur(5px);
+}

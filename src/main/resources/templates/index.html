@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TecToons</title>
+    <link rel="icon" th:href="@{/img/logotectoons4.png}" type="image/png">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+    <!-- Animate.css para animaciones -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+
+</head>
+
+<body>
+    <!-- Navbar -->
+    <div th:replace="fragments/navbar :: navbar"></div>
+
+    <!-- HERO con Carrusel -->
+    <section id="home" class="position-relative" style="height:90vh; overflow:hidden;">
+        <!-- Carrusel de fondo -->
+        <div id="heroCarousel" class="carousel slide carousel-fade" data-bs-ride="carousel">
+            <div class="carousel-inner">
+                <!-- Imagen 1 -->
+                <div class="carousel-item active">
+                    <img src="https://cdn.pixabay.com/photo/2024/06/23/01/37/abstract-art-8847185_1280.jpg"
+                        class="d-block w-100" style="object-fit:cover; height:90vh; filter:brightness(55%);" alt="">
+                </div>
+                <!-- Imagen 2 -->
+                <div class="carousel-item">
+                    <img src="https://cdn.pixabay.com/photo/2024/09/02/10/32/ai-generated-9016417_1280.png"
+                        class="d-block w-100" style="object-fit:cover; height:90vh; filter:brightness(55%);" alt="">
+                </div>
+                <!-- Imagen 3 -->
+                <div class="carousel-item">
+                    <img src="https://cdn.pixabay.com/photo/2023/10/30/15/22/ai-generated-8353113_1280.png"
+                        class="d-block w-100" style="object-fit:cover; height:90vh; filter:brightness(55%);" alt="">
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Contenido encima del carrusel -->
+        <div class="position-absolute top-50 start-50 translate-middle text-center px-4" style="z-index:5;">
+
+            <h1 class="fw-bold" style="color:#3a86ff; font-size:3rem; text-shadow:3px 3px 10px rgba(0,0,0,0.7);">
+                ¿Tienes talento en ilustración o animación?
+            </h1>
+
+            <p class="lead mt-3" style="color:white; text-shadow:2px 2px 6px rgba(0,0,0,0.8); font-size:1.3rem;">
+                Únete a <span class="fw-bold" style="color:#4cc9f0;">TecToons</span> y crea mundos increíbles.
+            </p>
+
+            <a th:href="@{/contacto}" class="btn btn-lg mt-3" style="background:#4cc9f0; color:#0b132b; border:none; padding:12px 35px; 
+                  font-weight:600; border-radius:50px; box-shadow:0 4px 15px rgba(0,0,0,0.4);">
+                Contáctanos
+            </a>
+        </div>
+
+    </section>
+
+
+    <!-- Portafolio Mejorado -->
+    <section class="py-5" id="portafolio" style="background:#f5f7ff; color:#1c2541;">
+        <div class="container text-center">
+            <!-- Título -->
+            <h2 class="mb-3 fw-bold" style="color:#3a86ff; text-shadow:1px 1px 3px rgba(0,0,0,0.08);">
+                Proyectos destacados
+            </h2>
+
+            <p class="mb-5" style="font-size:1.1rem; color:#1c2541;">
+                Descubre las creaciones más impresionantes de nuestros artistas
+            </p>
+
+            <div class="row g-4">
+
+                <!-- Proyecto (reutilizable) -->
+                <div class="col-md-4">
+                    <div class="card shadow-lg border-0 h-100"
+                        style="border-radius:20px; overflow:hidden; transition:transform .3s;">
+                        <img src="https://cdn.pixabay.com/photo/2019/09/24/06/10/insect-4500348_1280.jpg"
+                            class="card-img-top" alt="Proyecto 1" style="height:230px; object-fit:cover;">
+
+                        <div class="card-body p-4">
+                            <h5 class="fw-bold" style="color:#3a86ff;">Proyecto 1</h5>
+                            <p style="margin:0; color:#1c2541;">Autor: Artista X</p>
+                            <span style="font-size:1.7rem;">🎨</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="card shadow-lg border-0 h-100"
+                        style="border-radius:20px; overflow:hidden; transition:transform .3s;">
+                        <img src="https://cdn.pixabay.com/photo/2021/10/25/22/08/elf-6742091_1280.jpg"
+                            class="card-img-top" alt="Proyecto 2" style="height:230px; object-fit:cover;">
+
+                        <div class="card-body p-4">
+                            <h5 class="fw-bold" style="color:#3a86ff;">Proyecto 2</h5>
+                            <p style="margin:0; color:#1c2541;">Autor: Artista Y</p>
+                            <span style="font-size:1.7rem;">▶️</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="card shadow-lg border-0 h-100"
+                        style="border-radius:20px; overflow:hidden; transition:transform .3s;">
+                        <img src="https://cdn.pixabay.com/photo/2018/08/19/07/04/hot-air-balloon-3616100_1280.jpg"
+                            class="card-img-top" alt="Proyecto 3" style="height:230px; object-fit:cover;">
+
+                        <div class="card-body p-4">
+                            <h5 class="fw-bold" style="color:#3a86ff;">Proyecto 3</h5>
+                            <p style="margin:0; color:#1c2541;">Autor: Artista Z</p>
+                            <span style="font-size:1.7rem;">🎨</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="card shadow-lg border-0 h-100"
+                        style="border-radius:20px; overflow:hidden; transition:transform .3s;">
+                        <img src="https://cdn.pixabay.com/photo/2016/11/19/09/12/sketch-1838278_1280.jpg"
+                            class="card-img-top" alt="Proyecto 4" style="height:230px; object-fit:cover;">
+
+                        <div class="card-body p-4">
+                            <h5 class="fw-bold" style="color:#3a86ff;">Proyecto 4</h5>
+                            <p style="margin:0; color:#1c2541;">Autor: Artista W</p>
+                            <span style="font-size:1.7rem;">▶️</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="card shadow-lg border-0 h-100"
+                        style="border-radius:20px; overflow:hidden; transition:transform .3s;">
+                        <img src="https://cdn.pixabay.com/photo/2023/10/30/15/22/ai-generated-8353113_1280.png"
+                            class="card-img-top" alt="Proyecto 5" style="height:230px; object-fit:cover;">
+
+                        <div class="card-body p-4">
+                            <h5 class="fw-bold" style="color:#3a86ff;">Proyecto 5</h5>
+                            <p style="margin:0; color:#1c2541;">Autor: Artista V</p>
+                            <span style="font-size:1.7rem;">🎨</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="card shadow-lg border-0 h-100"
+                        style="border-radius:20px; overflow:hidden; transition:transform .3s;">
+                        <img src="https://cdn.pixabay.com/photo/2020/04/01/13/09/parrot-4991168_1280.jpg"
+                            class="card-img-top" alt="Proyecto 6" style="height:230px; object-fit:cover;">
+
+                        <div class="card-body p-4">
+                            <h5 class="fw-bold" style="color:#3a86ff;">Proyecto 6</h5>
+                            <p style="margin:0; color:#1c2541;">Autor: Artista U</p>
+                            <span style="font-size:1.7rem;">▶️</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Botón final -->
+            <div class="mt-5">
+                <a th:href="@{/portafolio-obras}" class="btn btn-lg px-4 py-2"
+                    style="border-radius:50px; border:2px solid #3a86ff; color:#3a86ff;">
+                    Ver todo el portafolio
+                </a>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Tienda Mejorada -->
+    <section class="py-5" id="tienda" style="background:#f8f9ff;">
+        <div class="container text-center">
+
+            <!-- Título -->
+            <h2 class="mb-3 fw-bold" style="color:#1c2541;">Lo más popular</h2>
+            <p class="mb-5" style="color:#3a86ff; font-size:1.1rem;">
+                Productos únicos creados por nuestros artistas
+            </p>
+
+            <div class="row g-4">
+
+                <!-- Producto 1 -->
+                <div class="col-md-3">
+                    <div class="card shadow-lg border-0 h-100"
+                        style="border-radius:18px; overflow:hidden; transition:transform .3s;">
+
+                        <img src="https://cdn.pixabay.com/photo/2013/02/19/21/24/trees-83487_1280.jpg"
+                            class="card-img-top" alt="Stickers" style="height:220px; object-fit:cover;">
+
+                        <div class="card-body text-center p-4">
+                            <h5 class="fw-bold" style="color:#3a86ff;">Stickers</h5>
+                            <p style="color:#1c2541;">Artista: X</p>
+                            <p class="fw-bold" style="color:#3a86ff;">$5.00</p>
+
+                            <button class="btn btn-lg w-100 mt-2"
+                                style="background:#4cc9f0; color:#0b132b; border-radius:12px;">
+                                Ver producto
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Producto 2 -->
+                <div class="col-md-3">
+                    <div class="card shadow-lg border-0 h-100"
+                        style="border-radius:18px; overflow:hidden; transition:transform .3s;">
+
+                        <img src="https://cdn.pixabay.com/photo/2020/04/03/07/26/eye-4997724_1280.png"
+                            class="card-img-top" alt="Postales" style="height:220px; object-fit:cover;">
+
+                        <div class="card-body text-center p-4">
+                            <h5 class="fw-bold" style="color:#3a86ff;">Postales</h5>
+                            <p style="color:#1c2541;">Artista: Y</p>
+                            <p class="fw-bold" style="color:#3a86ff;">$3.00</p>
+
+                            <button class="btn btn-lg w-100 mt-2"
+                                style="background:#4cc9f0; color:#0b132b; border-radius:12px;">
+                                Ver producto
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Producto 3 -->
+                <div class="col-md-3">
+                    <div class="card shadow-lg border-0 h-100"
+                        style="border-radius:18px; overflow:hidden; transition:transform .3s;">
+
+                        <img src="https://cdn.pixabay.com/photo/2018/07/09/08/17/windows-3525571_1280.jpg"
+                            class="card-img-top" alt="Collares" style="height:220px; object-fit:cover;">
+
+                        <div class="card-body text-center p-4">
+                            <h5 class="fw-bold" style="color:#3a86ff;">Collares</h5>
+                            <p style="color:#1c2541;">Artista: Z</p>
+                            <p class="fw-bold" style="color:#3a86ff;">$10.00</p>
+
+                            <button class="btn btn-lg w-100 mt-2"
+                                style="background:#4cc9f0; color:#0b132b; border-radius:12px;">
+                                Ver producto
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Producto 4 -->
+                <div class="col-md-3">
+                    <div class="card shadow-lg border-0 h-100"
+                        style="border-radius:18px; overflow:hidden; transition:transform .3s;">
+
+                        <img src="https://cdn.pixabay.com/photo/2018/07/11/08/19/flowers-3530480_1280.jpg"
+                            class="card-img-top" alt="Posters" style="height:220px; object-fit:cover;">
+
+                        <div class="card-body text-center p-4">
+                            <h5 class="fw-bold" style="color:#3a86ff;">Posters</h5>
+                            <p style="color:#1c2541;">Artista: W</p>
+                            <p class="fw-bold" style="color:#3a86ff;">$15.00</p>
+
+                            <button class="btn btn-lg w-100 mt-2"
+                                style="background:#4cc9f0; color:#0b132b; border-radius:12px;">
+                                Ver producto
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Botón final -->
+            <div class="mt-5">
+                <a th:href="@{/tienda}" class="btn btn-lg px-4 py-2"
+                    style="border-radius:50px; border:2px solid #3a86ff; color:#3a86ff;">
+                    Ver tienda completa
+                </a>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Blog Mejorado -->
+    <section class="py-5" id="blog" style="background: #f8f9ff;">
+        <div class="container text-center">
+
+            <!-- Título -->
+            <h2 class="mb-3 fw-bold" style="color:#1c2541;">Noticias y novedades</h2>
+            <p class="mb-5" style="font-size: 1.1rem; color:#3a86ff;">
+                Mantente al día con las últimas actualizaciones del mundo creativo
+            </p>
+
+            <div class="row g-4">
+
+                <!-- Card 1 -->
+                <div class="col-md-4">
+                    <div class="card h-100 shadow-lg border-0"
+                        style="border-radius: 18px; overflow: hidden; transition: transform .3s;">
+
+                        <img src="https://cdn.pixabay.com/photo/2016/01/02/00/56/postcards-1117324_1280.jpg"
+                            class="card-img-top" alt="Noticia 1" style="height: 220px; object-fit: cover;">
+
+                        <div class="card-body text-start p-4">
+                            <h5 class="fw-bold" style="color:#1c2541;">Título Noticia 1</h5>
+                            <p style="color:#3a86ff; font-size: 0.9rem;">Fecha: 01/01/2025</p>
+                            <p style="font-size: 0.95rem; color:#555;">
+                                Descubre las últimas tendencias en ilustración digital y arte moderno.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="col-md-4">
+                    <div class="card h-100 shadow-lg border-0"
+                        style="border-radius: 18px; overflow: hidden; transition: transform .3s;">
+
+                        <img src="https://cdn.pixabay.com/photo/2017/04/22/15/28/graffiti-2251571_1280.jpg"
+                            class="card-img-top" alt="Noticia 2" style="height: 220px; object-fit: cover;">
+
+                        <div class="card-body text-start p-4">
+                            <h5 class="fw-bold" style="color:#1c2541;">Título Noticia 2</h5>
+                            <p style="color:#3a86ff; font-size: 0.9rem;">Fecha: 02/01/2025</p>
+                            <p style="font-size: 0.95rem; color:#555;">
+                                Artistas emergentes están revolucionando la industria creativa.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="col-md-4">
+                    <div class="card h-100 shadow-lg border-0"
+                        style="border-radius: 18px; overflow: hidden; transition: transform .3s;">
+
+                        <img src="https://cdn.pixabay.com/photo/2017/10/14/23/39/wall-art-2852231_1280.jpg"
+                            class="card-img-top" alt="Noticia 3" style="height: 220px; object-fit: cover;">
+
+                        <div class="card-body text-start p-4">
+                            <h5 class="fw-bold" style="color:#1c2541;">Título Noticia 3</h5>
+                            <p style="color:#3a86ff; font-size: 0.9rem;">Fecha: 03/01/2025</p>
+                            <p style="font-size: 0.95rem; color:#555;">
+                                Nuevas técnicas y estilos visuales inspirados en arte urbano.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Botón -->
+            <div class="text-center mt-5">
+                <a th:href="@{/blog}" class="btn btn-lg px-4 py-2"
+                    style="border-radius: 50px; border: 2px solid #3a86ff; color:#3a86ff;">
+                    Ir al blog
+                </a>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Servicios / Contacto -->
+    <section class="py-5 text-white text-center" style="background: linear-gradient(135deg, #1c2541 0%, #3a86ff 60%, #4cc9f0 100%); 
+                padding: 80px 20px;">
+
+        <div class="container">
+            <h2 class="fw-bold mb-3" style="font-size: 2.4rem; letter-spacing: 1px;">
+                ¿Eres una empresa o independiente que necesita un diseñador o ilustrador?
+            </h2>
+
+            <p class="lead mb-4" style="font-size: 1.25rem; opacity: .92;">
+                Nuestro equipo creativo está listo para transformar tu idea en algo extraordinario.
+            </p>
+
+            <a th:href="@{/contacto}" class="btn btn-light btn-lg px-4 py-2 fw-semibold shadow"
+                style="border-radius: 8px; transition: 0.3s;">
+                Contactar ahora
+            </a>
+        </div>
+    </section>
+
+
+    <!-- Footer -->
+    <div th:replace="fragments/footer :: footer"></div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script th:src="@{/js/script.js}"></script>
+</body>
+
+</html>

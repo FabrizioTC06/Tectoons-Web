@@ -1,0 +1,31 @@
+/* carrito.main.css — TecToons */
+/* Estilos para la vista del carrito */
+
+body {
+  font-family: "Poppins", sans-serif;
+  background-color: #f8f9fa;
+}
+
+table {
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+th {
+  color: #0b132b;
+}
+
+#carrito-body td img {
+  border-radius: 10px;
+  object-fit: cover;
+}
+
+.btn-light {
+  color: #0851f6;
+}
+
+h4 span {
+  color: #0851f6;
+  font-weight: 700;
+}

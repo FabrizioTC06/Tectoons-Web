@@ -1,0 +1,17 @@
+.obra-card img {
+  height: 260px;
+  object-fit: cover;
+  border-bottom: 1px solid #eee;
+}
+
+.nav-link {
+  color: #444 !important;
+}
+
+.nav-link.active {
+  color: #0d6efd !important;
+}
+
+.footer {
+  background: #111;
+}

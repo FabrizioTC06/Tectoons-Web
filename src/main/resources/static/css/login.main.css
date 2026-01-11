@@ -1,0 +1,138 @@
+/* ===== Fondo con gradiente y fondo de imagen ===== */
+.login-bg {
+  background:
+    linear-gradient(rgba(45, 70, 150, 0.8), rgba(70, 40, 120, 0.8)),
+    url("../img/fondo-login2.jpg") no-repeat center center/cover;
+  min-height: 100vh;
+  position: relative;
+}
+
+/* ===== Header superior ===== */
+.header {
+  position: absolute;
+  top: 20px;
+  left: 40px;
+  display: flex;
+  align-items: center;
+  z-index: 10;
+}
+
+.logo {
+  width: 60px;
+  height: auto;
+}
+
+.brand-name {
+  color: white;
+  font-weight: 700;
+  font-size: 1.8rem;
+  letter-spacing: 1px;
+}
+
+.brand-name .highlight {
+  color: #facc15;
+}
+
+/* ===== Tarjeta principal ===== */
+.login-card {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  width: 100%;
+  max-width: 420px;
+}
+
+/* ===== Inputs ===== */
+.form-control {
+  border-radius: 10px;
+  border: none;
+  padding: 12px;
+  background: rgba(255, 255, 255, 0.15);
+  color: white;
+}
+
+.form-control:focus {
+  background: rgba(255, 255, 255, 0.25);
+  box-shadow: 0 0 0 3px rgba(250, 204, 21, 0.3);
+  color: white;
+}
+
+.form-control::placeholder {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+/* ===== Botón ===== */
+.login-btn {
+  background-color: #facc15;
+  color: #1e1e1e;
+  border-radius: 10px;
+  padding: 12px;
+  transition: all 0.3s ease;
+  font-size: 1rem;
+}
+
+.login-btn:hover {
+  background-color: #ffdd33;
+  transform: translateY(-2px);
+}
+
+/* ===== Textos ===== */
+.text-light {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.text-warning {
+  color: #ffd43b !important;
+}
+
+/* ===== Responsividad ===== */
+@media (max-width: 768px) {
+  .logo {
+    width: 50px;
+  }
+
+  .brand-name {
+    font-size: 1.5rem;
+  }
+
+  .login-card {
+    margin-top: 3rem;
+    padding: 2rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .header {
+    top: 10px;
+    left: 20px;
+  }
+
+  .logo {
+    width: 45px;
+  }
+
+  .brand-name {
+    font-size: 1.3rem;
+  }
+
+  .login-card {
+    margin: 0 15px;
+    padding: 2rem 1.5rem;
+  }
+}
+
+/* ===== Logo del login ===== */
+.logo-login {
+  width: 120px;              /* Tamaño moderado */
+  height: auto;
+  object-fit: contain;       /* Mantiene proporciones */
+  margin-bottom: 10px;       /* Separación del título */
+  filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.3)); /* Pequeño brillo */
+}
+
+/* En pantallas pequeñas, reduce un poco más */
+@media (max-width: 576px) {
+  .logo-login {
+    width: 90px;
+  }
+}

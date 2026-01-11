@@ -1,0 +1,385 @@
+/* artistas.main.css
+   Estilos para la página de artistas TecToons.
+   Paleta: #0851f6 (principal), #3b82f6 (secundario), fondo blanco.
+*/
+
+.artist-card {
+  border: none;
+  border-radius: 22px;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  background: #fff;
+}
+
+.artist-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 25px rgba(0,0,0,0.15);
+}
+
+.artist-image-wrapper {
+  position: relative;
+  overflow: hidden;
+}
+
+.artist-avatar {
+  width: 100%;
+  height: 320px;
+  object-fit: cover;
+  transition: transform 0.6s ease, filter 0.5s ease;
+  border-bottom: 3px solid #ff70a6;
+}
+
+.artist-card:hover .artist-avatar {
+  transform: scale(1.08);
+  filter: brightness(60%) blur(3px);
+}
+
+/* --- Overlay de obras --- */
+.artist-works-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  pointer-events: none;
+}
+
+.artist-card:hover .artist-works-overlay {
+  opacity: 1;
+}
+
+.artist-works-overlay img {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 14px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+  animation: slideImages 6s infinite ease-in-out;
+}
+
+@keyframes slideImages {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+
+/* --- Texto y botón --- */
+.card-title {
+  color: #222;
+  font-size: 1.3rem;
+}
+
+.card-text {
+  font-size: 0.9rem;
+  min-height: 50px;
+}
+
+.btn-follow {
+  background: linear-gradient(135deg, #5e81f3, #73b6f4);
+  color: #fff;
+  font-weight: 600;
+  border: none;
+  border-radius: 25px;
+  transition: all 0.3s ease;
+}
+
+.btn-follow:hover {
+  background: linear-gradient(135deg, #2ea5fa, #8190f4);
+  transform: scale(1.05);
+}
+
+
+
+
+:root{
+  --primary: #0851f6;
+  --secondary: #3b82f6;
+  --accent: #4cc9f0;
+  --bg: #ffffff;
+  --muted: #6b7280;
+  --card-shadow: 0 8px 30px rgba(8,81,246,0.08);
+}
+
+body{
+  font-family: 'Poppins', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  background: var(--bg);
+  color: #0b132b;
+  -webkit-font-smoothing:antialiased;
+}
+
+header p.text-light-opacity {
+  opacity: 0.9;
+}
+
+.artist-card{
+  border: none;
+  border-radius: 14px;
+  overflow: hidden;
+  transition: transform .35s cubic-bezier(.2,.9,.2,1), box-shadow .35s;
+  box-shadow: var(--card-shadow);
+  background: linear-gradient(180deg, rgba(255,255,255,0.9), rgba(250,250,250,0.9));
+}
+
+.artist-card:hover{
+  transform: translateY(-10px);
+  box-shadow: 0 16px 40px rgba(8,81,246,0.12);
+}
+
+/* avatar */
+.avatar{
+  width:72px;
+  height:72px;
+  object-fit:cover;
+  border: 3px solid rgba(255,255,255,0.4);
+  box-shadow: 0 6px 18px rgba(2,6,23,0.06);
+}
+
+/* buttons */
+.btn-primary{
+  background: linear-gradient(90deg,var(--primary),var(--secondary));
+  border: none;
+}
+.btn-primary:hover{
+  filter:brightness(1.05);
+  transform: translateY(-2px);
+}
+
+/* follow active */
+.btn.following{
+  background: #1c2541 !important;
+  color: #fff;
+}
+
+/* small screens adjustments */
+@media (max-width:768px){
+  header .container{ gap: 0.75rem; }
+  .avatar{ width:56px; height:56px; }
+}
+
+/* animations (used by JS) */
+.fade-in-up{
+  animation: fadeInUp .6s ease forwards;
+  opacity: 0;
+  transform: translateY(14px);
+}
+@keyframes fadeInUp{
+  to { opacity:1; transform: translateY(0); }
+}
+
+/* utility to hide load more if not needed */
+.hidden { display: none !important; }
+
+
+
+
+
+
+/* 🌙 FOOTER TECToons */
+.footer {
+  background: linear-gradient(135deg, #023ff7, #3a7bf4, #9ebef5);
+  color: #f1f1f1;
+  font-family: 'Poppins', sans-serif;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Líneas decorativas animadas */
+.footer::before {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle at center, rgba(255,255,255,0.1) 0%, transparent 70%);
+  animation: pulse 8s infinite alternate;
+  z-index: 0;
+}
+
+@keyframes pulse {
+  from { transform: scale(1); opacity: 0.6; }
+  to { transform: scale(1.2); opacity: 0.9; }
+}
+
+/* Para que el contenido esté sobre el efecto */
+.footer > .container {
+  position: relative;
+  z-index: 1;
+}
+
+/* Títulos */
+.footer h5, .footer h6 {
+  color: #ffffff;
+  letter-spacing: 1px;
+}
+
+/* Enlaces */
+.footer-links a {
+  color: #cfd9df;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  display: inline-block;
+  padding: 3px 0;
+}
+
+.footer-links a:hover {
+  color: #00d4ff;
+  transform: translateX(5px);
+}
+
+/* Redes sociales */
+.social-icons a {
+  display: inline-block;
+  margin-right: 15px;
+  color: #ffffff;
+  font-size: 1.4rem;
+  transition: all 0.3s ease;
+}
+
+.social-icons a:hover {
+  color: #00d4ff;
+  transform: scale(1.2) rotate(5deg);
+}
+
+/* Input y botón */
+.footer .input-group .form-control {
+  border: none;
+  border-radius: 30px 0 0 30px;
+  padding: 10px 15px;
+}
+
+.footer .input-group .btn {
+  border-radius: 0 30px 30px 0;
+  transition: all 0.3s ease;
+}
+
+.footer .input-group .btn:hover {
+  background-color: #00d4ff;
+  color: #0b132b;
+}
+
+
+
+
+
+
+
+/* 🖼️ Fondo del header */
+.header-artistas {
+  position: relative;
+  background: url('https://e1.pxfuel.com/desktop-wallpaper/966/346/desktop-wallpaper-graphic-design-high-graphics.jpg')
+    no-repeat center center/cover;
+  color: #fff;
+  overflow: hidden;
+  border-bottom: 4px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* 🔤 Estilo del texto */
+.header-content {
+  position: relative;
+  z-index: 2;
+}
+
+.header-artistas h1 {
+  font-size: 3rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.7),
+               0 0 25px rgba(0, 255, 255, 0.4);
+  animation: fadeInDown 1.2s ease;
+}
+
+/* 🎊 Confeti estilo lluvia por toda la página */
+.confetti-rain {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none; /* No bloquea clics */
+  overflow: hidden;
+  z-index: 9999; /* Siempre visible encima */
+}
+
+.confetti-piece {
+  position: absolute;
+  width: 8px;
+  height: 14px;
+  background-color: red;
+  opacity: 0.8;
+  transform: rotate(15deg);
+  animation: confetti-fall linear infinite;
+}
+
+/* Animación de caída tipo lluvia */
+@keyframes confetti-fall {
+  0% {
+    transform: translateY(0) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(100vh) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+
+@keyframes confettiFall {
+  0% { transform: translateY(-20%) rotate(0deg); }
+  100% { transform: translateY(100%) rotate(360deg); }
+}
+
+/* 💫 Animaciones suaves de entrada */
+@keyframes fadeInDown {
+  from { opacity: 0; transform: translateY(-25px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(25px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* 📱 Responsive */
+@media (max-width: 768px) {
+  .header-artistas h1 { font-size: 2.2rem; }
+  .header-artistas p { font-size: 1rem; }
+}
+
+/* 🔘 Botón Seguir / Dejar de seguir */
+.btn-follow {
+  background: linear-gradient(135deg, #5e81f3, #73b6f4);
+  color: #fff;
+  font-weight: 600;
+  border: none;
+  border-radius: 25px;
+  padding: 10px;
+  transition: all 0.3s ease;
+}
+
+.btn-follow:hover {
+  background: linear-gradient(135deg, #2ea5fa, #8190f4);
+  transform: scale(1.05);
+}
+
+.btn-following {
+  background: #333 !important;
+  color: #fff !important;
+}
+
+.btn-following:hover {
+  background: #000 !important;
+  transform: scale(1.05);
+}
+
+/* 🔔 Animación suave de aparición */
+.fade-in {
+  animation: fadeIn 0.6s ease forwards;
+  opacity: 0;
+}
+@keyframes fadeIn {
+  to { opacity: 1; }
+}

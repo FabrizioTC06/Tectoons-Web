@@ -1,0 +1,417 @@
+/*!
+  blog.main.css
+  Estilos para la página Blog TecToons
+  Paleta: #0851f6, #3b82f6, #0b132b, #1c2541, #4cc9f0, #a2d2ff
+*/
+
+/* Tipografía básica */
+:root{
+  --tec-primary: #0851f6;
+  --tec-secondary: #3b82f6;
+  --tec-dark: #0b132b;
+  --tec-mid: #1c2541;
+  --tec-accent: #4cc9f0;
+  --tec-hover: #a2d2ff;
+  --bg-white: #ffffff;
+}
+
+body{
+  font-family: 'Poppins', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  background: var(--bg-white);
+  color: var(--tec-mid);
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+}
+
+.blog-hero {
+  position: relative;
+  background: linear-gradient(135deg, #0b132b 0%, #1c2541 60%, #0851f6 100%);
+  color: #fff;
+  padding: 6rem 0 5rem;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+/* Efecto textura artística */
+.blog-hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: url('/img/texture-paper.png'); /* textura sutil tipo papel o lienzo */
+  background-size: cover;
+  background-repeat: no-repeat;
+  mix-blend-mode: overlay;
+  opacity: 0.25;
+  z-index: -1;
+}
+
+/* Efecto diagonal con transparencia azul */
+.blog-hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(120deg, rgba(8,81,246,0.3), transparent 70%);
+  z-index: -1;
+}
+
+/* Texto principal */
+.blog-hero h1 {
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-weight: 700;
+  letter-spacing: -1px;
+  line-height: 1.1;
+  text-transform: uppercase;
+  color: #ffffff;
+  text-shadow: 0 4px 18px rgba(0, 0, 0, 0.3);
+}
+
+/* Subtítulo */
+.blog-hero p {
+  font-size: 1.2rem;
+  color: #dce6ff;
+  max-width: 650px;
+}
+
+/* Botón con estilo revista */
+.blog-hero .btn {
+  border: 2px solid #4cc9f0;
+  color: #fff;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  transition: all 0.3s ease;
+}
+
+.blog-hero .btn:hover {
+  background: #4cc9f0;
+  color: #0b132b;
+  box-shadow: 0 0 20px rgba(76,201,240,0.3);
+}
+
+/*!
+  blog.main.css
+  Estilos para la página Blog TecToons
+  Paleta: #0851f6, #3b82f6, #0b132b, #1c2541, #4cc9f0, #a2d2ff
+*/
+
+/* Tipografía básica */
+:root{
+  --tec-primary: #0851f6;
+  --tec-secondary: #3b82f6;
+  --tec-dark: #0b132b;
+  --tec-mid: #1c2541;
+  --tec-accent: #4cc9f0;
+  --tec-hover: #a2d2ff;
+  --bg-white: #ffffff;
+}
+
+body{
+  font-family: 'Poppins', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  background: var(--bg-white);
+  color: var(--tec-mid);
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+}
+
+/* HERO oscuro */
+.blog-hero{
+  background: linear-gradient(135deg, rgba(8,81,246,0.95), rgba(59,130,246,0.85));
+  color: #fff;
+  background-image: linear-gradient(120deg, rgba(8,81,246,0.98) 0%, rgba(10,25,60,0.85) 100%), radial-gradient(circle at 10% 10%, rgba(76,201,240,0.06), transparent 15%);
+  padding: 4.5rem 0;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  box-shadow: 0 10px 30px rgba(8,81,246,0.08);
+}
+
+/* FILTROS (estilo moderno con animación suave y contraste visual) */
+nav[aria-label="Filtros del blog"] {
+  background: linear-gradient(90deg, rgba(8,81,246,0.05), rgba(76,201,240,0.08));
+  border-radius: 12px;
+  padding: 1rem 1.2rem;
+  box-shadow: 0 4px 10px rgba(8,81,246,0.05);
+  backdrop-filter: blur(6px);
+}
+
+.nav-pills .nav-link {
+  color: var(--tec-primary);
+  background: rgba(8,81,246,0.08);
+  border: 1px solid rgba(8,81,246,0.15);
+  border-radius: 20px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  padding: 0.4rem 1rem;
+}
+
+.nav-pills .nav-link:hover {
+  background: var(--tec-accent);
+  color: #fff;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(8,81,246,0.2);
+}
+
+.nav-pills .nav-link.active {
+  background: var(--tec-primary);
+  color: #fff;
+  border-color: var(--tec-primary);
+  box-shadow: 0 4px 15px rgba(8,81,246,0.35);
+  transform: scale(1.05);
+}
+
+/* POSTS GRID - tarjetas */
+.post-card {
+  background: #fff;
+  border-radius: 12px;
+  overflow: hidden;
+  transition: transform .28s cubic-bezier(.2,.9,.2,1), box-shadow .28s;
+  border: 1px solid rgba(15,20,40,0.04);
+  position: relative;
+}
+
+.post-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 10px 30px rgba(12,24,60,0.08);
+}
+.post-card .thumb {
+  display:block;
+  width:100%;
+  height:170px;
+  object-fit:cover;
+  transition: transform .35s ease;
+}
+.post-card:hover .thumb { transform: scale(1.05); filter: saturate(0.95); }
+
+/* card body */
+.post-card .card-body {
+  padding: 1rem;
+}
+.post-title {
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--tec-dark);
+}
+.post-meta {
+  font-size: .85rem;
+  color: #6b7280;
+}
+
+/* Sidebar: recent list */
+#recentList li + li { margin-top: .6rem; }
+#recentList img { width:48px; height:48px; object-fit:cover; border-radius:8px; }
+
+/* Pagination */
+.pagination .page-link {
+  border-radius: 8px;
+  color: var(--tec-dark);
+}
+.pagination .page-item.active .page-link {
+  background: var(--tec-primary);
+  border-color: var(--tec-primary);
+  color: #fff;
+}
+
+/* Subscribe toast styling (dark) */
+.toast.align-items-center.text-bg-dark {
+  background: rgba(16,18,38,0.95);
+  color: #fff;
+}
+
+/* Reveal animation (initial state) */
+.reveal {
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity .6s ease, transform .6s ease;
+}
+.reveal.visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* Responsive tweaks */
+@media (max-width: 991px) {
+  .blog-hero { padding: 3rem 0; }
+  .post-card .thumb { height:140px; }
+}
+
+/* ===============================
+   🎨 BOTONES CON ESTILO TECLOOK
+   =============================== */
+
+/* Botón base */
+.btn,
+button,
+.page-link {
+  font-weight: 600;
+  letter-spacing: 0.4px;
+  border-radius: 10px;
+  padding: 0.5rem 1.1rem;
+  transition: all 0.25s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Efecto de brillo diagonal */
+.btn::before,
+button::before {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -70%;
+  width: 250%;
+  height: 200%;
+  background: linear-gradient(120deg, transparent 30%, rgba(255,255,255,0.35) 50%, transparent 70%);
+  transform: translateX(-100%) rotate(25deg);
+  transition: transform 0.7s ease;
+  pointer-events: none;
+}
+
+.btn:hover::before,
+button:hover::before {
+  transform: translateX(120%) rotate(25deg);
+}
+
+/* Botón primario */
+.btn-primary,
+button.btn-primary {
+  background: linear-gradient(90deg, var(--tec-primary), var(--tec-secondary));
+  border: none;
+  color: #fff;
+  box-shadow: 0 4px 15px rgba(8,81,246,0.3);
+}
+
+.btn-primary:hover {
+  background: linear-gradient(90deg, var(--tec-secondary), var(--tec-primary));
+  box-shadow: 0 8px 25px rgba(8,81,246,0.4);
+  transform: translateY(-2px);
+}
+
+/* Botón outline (borde azul) */
+.btn-outline-primary {
+  border: 2px solid var(--tec-primary);
+  color: var(--tec-primary);
+  background: transparent;
+}
+
+.btn-outline-primary:hover {
+  background: var(--tec-primary);
+  color: #fff;
+  box-shadow: 0 4px 15px rgba(8,81,246,0.25);
+}
+
+/* Botón secundario */
+.btn-outline-secondary {
+  border: 2px solid rgba(8,81,246,0.2);
+  color: var(--tec-mid);
+  background: rgba(8,81,246,0.03);
+}
+
+.btn-outline-secondary:hover {
+  background: var(--tec-accent);
+  color: var(--tec-dark);
+  box-shadow: 0 4px 15px rgba(76,201,240,0.25);
+  transform: translateY(-1px);
+}
+
+/* Botón “Leer más” */
+.post-card .btn-sm {
+  font-size: 0.85rem;
+  padding: 0.35rem 0.9rem;
+  border-radius: 8px;
+  background: linear-gradient(90deg, var(--tec-primary), var(--tec-accent));
+  color: #fff;
+  border: none;
+  box-shadow: 0 3px 10px rgba(8,81,246,0.25);
+  position: absolute;
+  bottom: 12px;
+  right:  16px;
+  transition: all 0.3s ease;
+}
+
+.post-card .btn-sm:hover {
+  transform: scale(1.05);
+  box-shadow: 0 5px 18px rgba(8,81,246,0.4);
+}
+
+
+
+/* 🌙 FOOTER TECToons */
+.footer {
+  background: linear-gradient(135deg, #023ff7, #3a7bf4, #9ebef5);
+  color: #f1f1f1;
+  font-family: 'Poppins', sans-serif;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Líneas decorativas animadas */
+.footer::before {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle at center, rgba(255,255,255,0.1) 0%, transparent 70%);
+  animation: pulse 8s infinite alternate;
+  z-index: 0;
+}
+
+@keyframes pulse {
+  from { transform: scale(1); opacity: 0.6; }
+  to { transform: scale(1.2); opacity: 0.9; }
+}
+
+/* Para que el contenido esté sobre el efecto */
+.footer > .container {
+  position: relative;
+  z-index: 1;
+}
+
+/* Títulos */
+.footer h5, .footer h6 {
+  color: #ffffff;
+  letter-spacing: 1px;
+}
+
+/* Enlaces */
+.footer-links a {
+  color: #cfd9df;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  display: inline-block;
+  padding: 3px 0;
+}
+
+.footer-links a:hover {
+  color: #00d4ff;
+  transform: translateX(5px);
+}
+
+/* Redes sociales */
+.social-icons a {
+  display: inline-block;
+  margin-right: 15px;
+  color: #ffffff;
+  font-size: 1.4rem;
+  transition: all 0.3s ease;
+}
+
+.social-icons a:hover {
+  color: #00d4ff;
+  transform: scale(1.2) rotate(5deg);
+}
+
+/* Input y botón */
+.footer .input-group .form-control {
+  border: none;
+  border-radius: 30px 0 0 30px;
+  padding: 10px 15px;
+}
+
+.footer .input-group .btn {
+  border-radius: 0 30px 30px 0;
+  transition: all 0.3s ease;
+}
+
+.footer .input-group .btn:hover {
+  background-color: #00d4ff;
+  color: #0b132b;
+}

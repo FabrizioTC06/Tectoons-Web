@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title th:text="${artista.nombreArtistico} + ' | TecToons'">Detalle Artista | TecToons</title>
+  <link rel="icon" th:href="@{/img/logotectoons4.png}" type="image/png">
+
+  <!-- Bootstrap 5 -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+  <!-- CSS personalizado -->
+  <link rel="stylesheet" th:href="@{/css/detalle-artista.main.css}">
+  <link rel="stylesheet" th:href="@{/css/styles.css}">
+
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: #f5f7fb;
+      color: #2b2b2b;
+    }
+
+    /* HERO con estilo moderno */
+    .artist-hero {
+      background: linear-gradient(135deg, rgba(70, 70, 180, .75), rgba(100, 110, 255, .7)),
+        url('/img/hero-bg.jpg') center/cover no-repeat;
+      padding: 80px 0;
+      border-bottom-left-radius: 40px;
+      border-bottom-right-radius: 40px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .artist-hero::before {
+      content: "";
+      position: absolute;
+      top: -50px;
+      right: -80px;
+      width: 300px;
+      height: 300px;
+      background: rgba(255, 255, 255, .15);
+      border-radius: 50%;
+      filter: blur(30px);
+    }
+
+    .artist-avatar {
+      width: 180px;
+      height: 180px;
+      border: 6px solid #ffffffcc;
+      border-radius: 50%;
+      object-fit: cover;
+      box-shadow: 0 12px 25px rgba(0, 0, 0, .25);
+      transition: transform .3s ease;
+    }
+
+    .artist-avatar:hover {
+      transform: scale(1.05);
+    }
+
+    /* NAV mejorado */
+    nav.bg-white {
+      background: #ffffffcc !important;
+      backdrop-filter: blur(7px);
+      border-bottom: none;
+    }
+
+    #artistTabs .nav-link {
+      color: #444;
+      padding: 10px 22px;
+      border-radius: 50px;
+      transition: all .3s ease;
+    }
+
+    #artistTabs .nav-link:hover {
+      background: #eef2ff;
+      color: #4c6ef5;
+    }
+
+    #artistTabs .nav-link.active {
+      background: #4c6ef5;
+      color: #fff !important;
+      box-shadow: 0 3px 10px rgba(76, 110, 245, .4);
+    }
+
+    /* TÍTULOS DE SECCIÓN */
+    h3.fw-bold {
+      color: #364fc7;
+      border-left: 6px solid #4c6ef5;
+      padding-left: 14px;
+    }
+
+    /* TARJETAS DE OBRAS */
+    .obra-card {
+      border: none;
+      border-radius: 18px;
+      overflow: hidden;
+      background: #fff;
+      transition: transform .25s ease, box-shadow .3s ease;
+    }
+
+    .obra-card img {
+      height: 260px;
+      object-fit: cover;
+      transition: transform .35s ease;
+    }
+
+    .obra-card:hover img {
+      transform: scale(1.09);
+    }
+
+    .obra-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 15px 35px rgba(0, 0, 0, .12);
+    }
+
+    /* BOTÓN LIKE */
+    .btn-like {
+      border-radius: 50px !important;
+      padding: 10px 18px;
+      background: #f1f3f5;
+      border: 1px solid #ddd !important;
+      transition: all .25s ease;
+    }
+
+    .btn-like:hover {
+      background: #ffe0e9;
+      transform: translateY(-2px);
+    }
+
+    .btn-like.liked {
+      background: #ff4d6d !important;
+      border-color: #ff4d6d !important;
+      color: #fff !important;
+      box-shadow: 0 5px 14px rgba(255, 77, 109, .4);
+    }
+
+    .icon-like {
+      transition: transform .2s ease;
+    }
+
+    .btn-like.liked .icon-like {
+      transform: scale(1.3);
+    }
+
+    /* TARJETA ABOUT PROFESIONAL */
+    #about .card {
+      background: #fff;
+      border-radius: 20px;
+      padding: 35px;
+      border: none;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, .07);
+    }
+
+    #about .card h5 {
+      color: #2f3e9e;
+    }
+
+    /* BOTONES REDES SOCIALES */
+    #about .btn-outline-dark {
+      border-radius: 50px;
+      padding: 8px 20px;
+      transition: all .3s ease;
+    }
+
+    #about .btn-outline-dark:hover {
+      background: #4c6ef5;
+      border-color: #4c6ef5;
+      color: white;
+    }
+
+    .post-card:hover,
+    .producto-card:hover {
+      transform: translateY(-6px);
+      transition: all .25s ease;
+      box-shadow: 0 15px 35px rgba(0, 0, 0, .12);
+    }
+
+    .post-card img,
+    .producto-card img {
+      transition: transform .35s ease;
+    }
+
+    .post-card:hover img,
+    .producto-card:hover img {
+      transform: scale(1.05);
+    }
+
+
+    /* RESPONSIVIDAD */
+    @media (max-width: 576px) {
+      .artist-avatar {
+        width: 140px;
+        height: 140px;
+      }
+
+      .artist-hero {
+        padding: 60px 0;
+      }
+
+      .obra-card img {
+        height: 210px;
+      }
+    }
+
+    /* NAVBAR ARTISTA */
+.artist-nav {
+  background: #ffffffee; 
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid #e2e6ff;
+}
+
+#artistTabs .nav-link {
+  color: #3b3b3b;
+  padding: 10px 22px;
+  border-radius: 40px;
+  transition: all .3s ease;
+  font-weight: 600;
+}
+
+#artistTabs .nav-link:hover {
+  background: #dfe4ff;
+  color: #3d59ff;
+  transform: translateY(-2px);
+}
+
+#artistTabs .nav-link.active {
+  background: #4c6ef5;
+  color: #fff !important;
+  box-shadow: 0 4px 12px rgba(76,110,245,.45);
+}
+
+
+  </style>
+
+</head>
+
+
+<body>
+  <div th:replace="fragments/navbar :: navbar"></div>
+
+  <!-- HERO -->
+<header class="artist-hero text-white position-relative" 
+        th:style="'background-image: linear-gradient(135deg, rgba(70,70,180,.7), rgba(100,110,255,.6)), url(' 
+        + ${artista.usuario.bannerPerfil != null ? artista.usuario.bannerPerfil : 'https://i.pinimg.com/1200x/4e/ba/00/4eba00e3056d85c1caea80bfd57e35b4.jpg'} 
+        + ');'">    <div class="hero-overlay"></div>
+
+    <div class="container py-5 position-relative">
+      <div class="row align-items-center">
+        <div class="col-md-3 text-center">
+          <img th:src="${artista.usuario.fotoPerfil != null ? artista.usuario.fotoPerfil : 'https://i.pinimg.com/736x/5e/d6/39/5ed63905c998c5c3cd29f2ab3890ee2e.jpg'}"
+     alt="Avatar del artista"
+     class="artist-avatar rounded-circle shadow-lg border">
+
+        </div>
+
+        <div class="col-md-9">
+          <h1 class="display-6 fw-bold" th:text="${artista.nombreArtistico}">Artista</h1>
+          <p class="lead opacity-75" th:text="${artista.usuario.descripcion}">
+            Descripción del artista
+          </p>
+
+          <div class="d-flex flex-wrap gap-3 mt-3">
+            <button id="btnFollow" class="btn btn-lg"
+              th:classappend="${usuario != null and siguiendo ? 'btn-success' : 'btn-primary'}"
+              th:data-artista-id="${artista.id}" th:data-logged="${usuario != null}"
+              th:text="${usuario != null and siguiendo ? 'Siguiendo' : 'Seguir'}">
+            </button>
+
+
+            <!--<a th:href="@{/tienda?autor={autor}(autor=${artista.nombreArtistico})}"
+              class="btn btn-outline-light btn-lg">
+              <i class="bi bi-bag"></i> Ver tienda
+            </a>-->
+          </div>
+
+          <!-- Contador de seguidores -->
+          <p id="followersCount" class="mt-2 fw-semibold">
+            <i class="bi bi-people"></i>
+            <span th:text="${seguidoresCount}">0</span> seguidores
+          </p>
+        </div>
+      </div>
+    </div>
+  </header>
+
+
+  <!-- NAV -->
+<nav class="artist-nav sticky-top shadow-sm">
+    <div class="container">
+      <ul class="nav nav-pills py-2 fw-semibold" id="artistTabs">
+        <li class="nav-item"><a class="nav-link active text-dark" href="#galeria">Galería</a></li>
+        <li class="nav-item"><a class="nav-link" href="#shop">Tienda</a></li>
+        <li class="nav-item"><a class="nav-link" href="#posts">Publicaciones</a></li>
+        <li class="nav-item"><a class="nav-link" href="#about">Sobre el artista</a></li>
+      </ul>
+    </div>
+  </nav>
+
+
+  <!-- CONTENIDO PRINCIPAL -->
+  <main class="container my-5">
+
+    <!-- GALERÍA -->
+    <section id="galeria" class="mb-5">
+
+      <h3 class="fw-bold mb-4">Galería del artista</h3>
+
+      <div class="row g-4" th:if="${artista.obras != null and !artista.obras.isEmpty()}">
+
+        <!-- TARJETAS DE OBRAS -->
+        <div class="col-md-4" th:each="obra : ${artista.obras}">
+          <div class="obra-card card shadow-sm border-0 rounded-4 overflow-hidden">
+
+            <img th:src="${obra.imagenUrl}" class="card-img-top" th:alt="${obra.titulo}">
+
+            <div class="card-body">
+              <h5 class="card-title fw-bold" th:text="${obra.titulo}"></h5>
+              <p class="text-muted small" th:text="${obra.categoria}"></p>
+
+              <div class="d-flex align-items-center justify-content-between">
+
+                <!-- BOTÓN DE LIKE -->
+                <button class="btn-like btn btn-light px-3 py-2 shadow-sm d-flex align-items-center gap-2"
+                  th:data-obra-id="${obra.id}">
+                  <i class="bi bi-heart fs-5 icon-like"></i>
+                  <span class="like-count fw-semibold">0</span>
+                </button>
+
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+      <!-- Sin obras -->
+      <div class="alert alert-info" th:if="${artista.obras == null or artista.obras.isEmpty()}">
+        Aún no hay obras por aquí. ¡Pronto verás creaciones increíbles de este artista!
+      </div>
+
+    </section>
+
+    <!-- SOBRE EL ARTISTA -->
+    <section id="about" class="mb-5">
+      <h3 class="fw-bold mb-4">Sobre el artista</h3>
+
+      <div class="card border-0 shadow-sm p-4 rounded-4">
+
+        <!-- BIO -->
+        <h5 class="fw-semibold mb-3">Biografía</h5>
+        <p
+          th:text="${artista.biografiaLarga != null ? artista.biografiaLarga : 'Este artista aún no ha agregado una biografía.'}">
+        </p>
+
+        <hr>
+
+        <!-- INFO GENERAL -->
+        <h5 class="fw-semibold mb-3">Información general</h5>
+        <ul class="list-unstyled">
+          <li><strong>Categoría principal:</strong> <span th:text="${artista.categoriaPrincipal}"></span></li>
+          <li><strong>Miembro desde:</strong>
+            <span th:text="${#temporals.format(artista.fechaCreacionRol, 'dd MMM yyyy')}"></span>
+          </li>
+        </ul>
+
+        <hr>
+
+        <!-- REDES SOCIALES -->
+        <h5 class="fw-semibold mb-3">Redes sociales</h5>
+        <div class="d-flex flex-wrap gap-3">
+
+          <a th:if="${artista.instagram}" th:href="${artista.instagram}" target="_blank" class="btn btn-outline-dark">
+            <i class="bi bi-instagram"></i> Instagram
+          </a>
+
+          <a th:if="${artista.tiktok}" th:href="${artista.tiktok}" target="_blank" class="btn btn-outline-dark">
+            <i class="bi bi-tiktok"></i> TikTok
+          </a>
+
+          <a th:if="${artista.x}" th:href="${artista.x}" target="_blank" class="btn btn-outline-dark">
+            <i class="bi bi-twitter-x"></i> X
+          </a>
+
+          <a th:if="${artista.youtube}" th:href="${artista.youtube}" target="_blank" class="btn btn-outline-dark">
+            <i class="bi bi-youtube"></i> YouTube
+          </a>
+
+        </div>
+
+        <hr>
+
+        <!-- PORTAFOLIO Y SITIO WEB -->
+        <h5 class="fw-semibold mb-3">Enlaces adicionales</h5>
+
+        <div class="d-flex flex-column gap-2">
+          <a th:if="${artista.portafolioUrl}" th:href="${artista.portafolioUrl}" target="_blank" class="link-primary">
+            🌐 Ver portafolio
+          </a>
+
+          <a th:if="${artista.sitioWeb}" th:href="${artista.sitioWeb}" target="_blank" class="link-primary">
+            🖥️ Sitio web oficial
+          </a>
+        </div>
+
+      </div>
+    </section>
+    <!-- POSTS -->
+    <section id="posts" class="mb-5">
+      <h3 class="fw-bold mb-4">Publicaciones del artista</h3>
+
+      <div class="row g-4" th:if="${artista.posts != null and !artista.posts.isEmpty()}">
+        <div class="col-md-4" th:each="post : ${artista.posts}">
+          <div class="card border-0 shadow-sm rounded-4 h-100 post-card overflow-hidden">
+
+            <!-- Imagen principal -->
+            <img th:if="${post.imagenUrl}" th:src="${post.imagenUrl}" class="card-img-top"
+              style="height:250px; object-fit:cover;">
+
+            <div class="card-body">
+
+              <!-- Título -->
+              <h5 class="fw-bold" th:text="${post.titulo}"></h5>
+
+              <!-- Contenido corto -->
+              <p class="text-muted" th:text="${#strings.abbreviate(post.contenido,120)}"></p>
+
+              <!-- Fecha -->
+              <p class="small text-secondary mt-2">
+                <i class="bi bi-calendar"></i>
+                <span th:text="${#temporals.format(post.fechaPublicacion,'dd MMM yyyy')}"></span>
+              </p>
+
+              <!-- Botón: Ver más -->
+              <a th:href="@{'/blog/' + ${post.id}}" class="btn btn-primary btn-sm px-3 mt-2">
+                Leer más
+              </a>
+
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <!-- Sin posts -->
+      <div class="alert alert-info" th:if="${artista.posts == null or artista.posts.isEmpty()}">
+        Aún no hay posts disponibles. Este artista está preparando contenido para el público..
+      </div>
+    </section>
+    <!-- TIENDA -->
+    <section id="shop" class="mb-5">
+      <h3 class="fw-bold mb-4">Productos en venta</h3>
+
+      <div class="row g-4" th:if="${artista.productos != null and !artista.productos.isEmpty()}">
+
+        <div class="col-md-3" th:each="prod : ${artista.productos}">
+          <div class="card border-0 shadow-sm rounded-4 h-100 producto-card overflow-hidden">
+
+            <!-- Imagen -->
+            <img th:src="${prod.imagenUrl}" class="card-img-top" style="height:220px; object-fit:cover;">
+
+            <div class="card-body">
+
+              <!-- Título -->
+              <h5 class="fw-semibold" th:text="${prod.titulo}"></h5>
+
+              <!-- Precio -->
+              <p class="text-primary fw-bold fs-5">
+                $<span th:text="${prod.precio}"></span>
+              </p>
+
+              <!-- Categoría -->
+              <p class="text-muted small" th:text="${prod.categoria}"></p>
+
+              <!-- Botón -->
+              <a th:href="@{'/tienda/' + ${prod.id}}" class="btn btn-outline-primary w-100 mt-2">
+                Ver producto
+              </a>
+
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Sin productos -->
+      <div class="alert alert-info" th:if="${artista.productos == null or artista.productos.isEmpty()}">
+        No hay productos en venta por ahora. ¡Pronto encontrarás artículos exclusivos de este artista!
+      </div>
+
+    </section>
+
+
+
+
+  </main>
+
+
+  <!-- FOOTER 
+  <footer class="footer bg-dark text-light pt-5 pb-4 mt-5">
+    <div class="container text-center">
+      <p>&copy; 2025 <strong>TecToons</strong>. Todos los derechos reservados.</p>
+    </div>
+  </footer>-->
+
+  <!-- MODAL LOGIN OBLIGATORIO 
+  <div class="modal fade" id="loginRequiredModal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content p-3">
+        <h5 class="modal-title">Inicia sesión para continuar</h5>
+        <div class="modal-body">
+          Debes iniciar sesión para poder seguir a un artista.
+        </div>
+        <div class="modal-footer">
+          <a href="/login" class="btn btn-primary">Iniciar sesión</a>
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+        </div>
+      </div>
+    </div>
+  </div>-->
+  <!-- Footer -->
+  <div th:replace="fragments/footer :: footer"></div>
+  <div th:replace="fragments/modals :: loginRequiredModal"></div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const tabs = document.querySelectorAll("#artistTabs .nav-link");
+      const sections = document.querySelectorAll("main section");
+
+      function showSection(id) {
+        sections.forEach(sec => sec.style.display = "none");
+        document.querySelector(id).style.display = "block";
+
+        tabs.forEach(t => t.classList.remove("active"));
+        document.querySelector(`#artistTabs .nav-link[href="${id}"]`)
+          .classList.add("active");
+      }
+
+      // Configurar eventos
+      tabs.forEach(tab => {
+        tab.addEventListener("click", e => {
+          e.preventDefault();
+          const sectionId = tab.getAttribute("href");
+          showSection(sectionId);
+        });
+      });
+
+      // Mostrar por defecto la primera sección
+      showSection("#galeria");
+    });
+  </script>
+
+  <!-- Archivo JS -->
+  <script th:src="@{/js/detalle-artista.main.js}"></script>
+</body>
+
+</html>

@@ -1,0 +1,25 @@
+/* checkout.main.css — TecToons */
+/* Estilos de la vista de pago */
+
+body {
+  font-family: "Poppins", sans-serif;
+  background-color: #f8f9fa;
+}
+
+h4 {
+  color: #0b132b;
+}
+
+.card-header {
+  font-weight: 600;
+}
+
+.btn-primary {
+  background-color: #0851f6;
+  border: none;
+  transition: background 0.3s;
+}
+
+.btn-primary:hover {
+  background-color: #3b82f6;
+}

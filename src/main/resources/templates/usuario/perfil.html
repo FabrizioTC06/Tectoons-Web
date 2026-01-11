@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perfil de Usuario</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+    <link rel="icon" th:href="@{/img/logotectoons4.png}" type="image/png">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+
+</head>
+
+<body class="bg-light">
+    <div th:replace="fragments/navbar :: navbar"></div>
+
+    <div class="container py-5">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card shadow-sm">
+                    <!-- Banner -->
+                    <div th:if="${usuario.bannerPerfil != null}" class="card-img-top"
+                        th:style="'background-image: url(' + ${usuario.bannerPerfil} + '); height: 150px; background-size: cover; background-position: center;'">
+                    </div>
+                    <div class="card-body text-center">
+                        <!-- Foto de perfil -->
+                        <img th:src="@{${usuario.fotoPerfil}}" alt="Foto de perfil" class="rounded-circle mb-3"
+                            style="width: 120px; height: 120px; object-fit: cover;">
+
+                        <h4 th:text="${usuario.nombreCompleto}">Nombre Completo</h4>
+                        <p class="text-muted">@<span th:text="${usuario.nombreUsuario}">usuario</span></p>
+                        <hr>
+                        <div class="mb-2">
+                            <strong>Correo:</strong> <span th:text="${usuario.correo}">correo@ejemplo.com</span>
+                        </div>
+                        <div class="mb-2" th:if="${usuario.fechaNacimiento != null}">
+                            <strong>Fecha de nacimiento:</strong>
+                            <span
+                                th:text="${#temporals.format(usuario.fechaNacimiento, 'dd/MM/yyyy')}">01/01/2000</span>
+                        </div>
+                        <div class="mb-2" th:if="${usuario.ubicacion != null}">
+                            <strong>Ubicación:</strong> <span th:text="${usuario.ubicacion}">Ciudad, País</span>
+                        </div>
+                        <div class="mb-2" th:if="${usuario.celular != null}">
+                            <strong>Celular:</strong> <span th:text="${usuario.celular}">+51 912345678</span>
+                        </div>
+                        <div class="mb-2" th:if="${usuario.descripcion != null}">
+                            <strong>Descripción:</strong>
+                            <p th:text="${usuario.descripcion}">Descripción del usuario...</p>
+                        </div>
+                        <div class="d-grid mt-4">
+                            <a href="/usuario/editar-perfil" class="btn btn-primary btn-lg">Editar Perfil</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div th:replace="fragments/footer :: footer"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TecToons - Información de la Empresa</title>
+  <link rel="icon" th:href="@{/img/logotectoons4.png}" type="image/png">
+
+  <!-- Bootstrap 5 -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+
+  <!-- CSS Local -->
+
+  <link th:href="@{/css/nosotros.main.css}" rel="stylesheet">
+  <link rel="stylesheet" th:href="@{/css/styles.css}">
+
+
+</head>
+
+<body>
+  <div th:replace="fragments/navbar :: navbar"></div>
+  <div class="container">
+    <div class="logo-container">
+      <div class="logo glow-text">TecToons</div>
+      <div class="tagline">Creando universos animados con pasión y arte</div>
+    </div>
+
+    <div class="row">
+      <div class="col-12">
+        <h2 class="section-title glow-text">Información General</h2>
+      </div>
+
+      <div class="col-12">
+        <div class="info-card">
+          <div class="question">
+            <i class="fas fa-history"></i>
+            Nuestra Historia
+          </div>
+          <div class="answer">
+            <strong>TecToons</strong> nació como un pequeño proyecto dentro de las aulas de un
+            instituto, donde un grupo de jóvenes apasionados por la animación decidió unir fuerzas junto
+            a su profesor
+            para explorar el arte de contar historias mediante la técnica <em>tradigital</em> — una
+            mezcla entre lo tradicional y lo digital.
+            <br><br>
+            Su primer gran paso fue el proyecto <strong>Robuny</strong>, una producción que destacó por
+            su propuesta visual y su emotiva narrativa, obteniendo reconocimientos y motivando al grupo
+            a consolidarse como
+            un colectivo independiente enfocado en la creación de animaciones originales y llenas de
+            alma.
+          </div>
+        </div>
+      </div>
+
+      <div class="col-12">
+        <div class="info-card">
+          <div class="question">
+            <i class="fas fa-bullseye"></i>
+            Misión
+          </div>
+          <div class="answer">
+            Nuestra misión es crear proyectos de animación que combinen <strong>arte, emoción y
+              narrativa visual</strong>,
+            potenciando el talento independiente y construyendo universos que conecten con el público.
+            <br><br>
+            En TecToons creemos que cada historia tiene el poder de inspirar y dejar huella, por eso
+            buscamos transmitir mensajes significativos a través de personajes, mundos y emociones que
+            reflejen
+            la creatividad y la pasión de sus creadores.
+          </div>
+        </div>
+      </div>
+
+      <div class="col-12">
+        <div class="info-card">
+          <div class="question">
+            <i class="fas fa-eye"></i>
+            Visión
+          </div>
+          <div class="answer">
+            Queremos consolidarnos como un <strong>referente en la animación peruana</strong>,
+            reconocidos por nuestro estilo distintivo,
+            innovación visual y compromiso con el arte narrativo.
+            <br><br>
+            Nuestra meta es expandir las fronteras del arte local, inspirando a nuevas generaciones de
+            artistas
+            a creer en su talento y aportar al crecimiento de la industria creativa en el país y en el
+            mundo.
+          </div>
+        </div>
+      </div>
+
+      <div class="col-12">
+        <div class="info-card">
+          <div class="question">
+            <i class="fas fa-heart"></i>
+            Valores
+          </div>
+          <div class="answer">
+            <li>🎨 <strong>Creatividad:</strong> La esencia que impulsa nuestras ideas y proyectos.</li>
+            <li>💪 <strong>Determinación:</strong> La fuerza que nos motiva a seguir creando pese a los
+              desafíos.</li>
+            <li>✨ <strong>Arte:</strong> El lenguaje universal que conecta a las personas sin importar
+              fronteras.</li>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-12">
+        <div class="info-card">
+          <div class="question">
+            <i class="fas fa-users"></i>
+            Público Objetivo
+          </div>
+          <div class="answer">
+            <strong>TecToons</strong> está dirigido a <strong>personas de todas las edades</strong> que
+            disfrutan del arte, la animación
+            y las historias con personalidad.
+            <br><br>
+            Nuestros proyectos buscan conectar tanto con los jóvenes creativos que ven en la animación
+            una forma
+            de expresión, como con los adultos que aprecian las producciones con profundidad emocional y
+            estilo visual propio.
+            <br><br>
+            En esencia, nuestro público son <strong>amantes de la animación independiente</strong>,
+            artistas en formación,
+            estudiantes, y cualquier persona que valore la creatividad y la narrativa visual como una
+            forma de inspiración.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div th:replace="fragments/footer :: footer"></div>
+
+
+  <!-- Bootstrap JS Bundle -->
+  <script th:src="@{https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js}"></script>
+  <script th:src="@{/js/nosotros.main.js}"></script>
+
+</body>
+
+</html>
+
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Solicitud de Artista</title>
+    <link rel="icon" th:href="@{/img/logotectoons4.png}" type="image/png">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+
+</head>
+
+<body>
+    <div th:replace="fragments/navbar :: navbar"></div>
+
+    <div class="container mt-5">
+        <h2>Enviar solicitud de artista</h2>
+
+        <!-- Mensaje de error o ya artista -->
+        <div th:if="${error}" class="alert alert-danger" th:text="${error}"></div>
+        <div th:if="${esArtista}" class="alert alert-warning">
+            Ya eres artista, no puedes enviar otra solicitud.
+        </div>
+
+        <form th:action="@{/solicitud-artista}" th:object="${solicitud}" method="post">
+            <div class="mb-3">
+                <label for="nombreArtistico" class="form-label">Nombre Artístico</label>
+                <input type="text" class="form-control" th:field="*{nombreArtistico}"
+                    placeholder="Ingresa tu nombre artístico" th:disabled="${esArtista}" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="categoriaPrincipal" class="form-label">Categoría Principal</label>
+                <select class="form-select" th:field="*{categoriaPrincipal}" th:disabled="${esArtista}" required>
+                    <option value="" disabled selected>Seleccione una categoría</option>
+                    <option value="Ilustrador">Ilustrador</option>
+                    <option value="Artista de Personajes">Artista de Personajes</option>
+                    <option value="Artista de Animación">Artista de Animación</option>
+                    <option value="Artista Estilizado">Artista Estilizado</option>
+                    <option value="Artista de Escenarios">Artista de Escenarios</option>
+                </select>
+            </div>
+
+            <div class="mb-3">
+                <label for="motivo" class="form-label">Motivo de la solicitud</label>
+                <textarea class="form-control" th:field="*{motivo}" placeholder="Cuéntanos por qué quieres ser artista"
+                    rows="4" th:disabled="${esArtista}" required></textarea>
+            </div>
+
+            <div class="mb-3">
+                <label for="evidenciaUrl" class="form-label">URL de evidencia (opcional)</label>
+                <input type="url" class="form-control" th:field="*{evidenciaUrl}" placeholder="Link a tu trabajo"
+                    th:disabled="${esArtista}">
+            </div>
+
+            <!-- Mostrar botón solo si NO es artista -->
+            <div th:if="${!esArtista}">
+                <button type="submit" class="btn btn-primary">Enviar Solicitud</button>
+            </div>
+        </form>
+    </div>
+    <div th:replace="fragments/footer :: footer"></div>
+
+</body>
+
+</html>

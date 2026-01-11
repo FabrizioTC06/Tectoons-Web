@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TecToons - Términos y Condiciones</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <link rel="icon" th:href="@{/img/logotectoons4.png}" type="image/png">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" th:href="@{/css/terminos-condiciones.main.css}">
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+
+</head>
+
+<body>
+
+    <div th:replace="fragments/navbar :: navbar"></div>
+
+    <div class="container">
+        <div class="logo-container">
+            <div class="logo glow-text">TecToons</div>
+            <div class="tagline">Términos y Condiciones de Uso</div>
+        </div>
+
+        <!-- Botón hamburguesa visible solo en móviles -->
+        <button class="btn btn-outline-light d-lg-none mb-3 w-100 toggle-sidebar">
+            <i class="fas fa-bars"></i> Menú de navegación
+        </button>
+
+        <div class="row">
+            <div class="col-lg-3">
+                <div class="nav-sidebar" id="sidebarMenu">
+                    <div class="nav-sidebar-title">
+                        <i class="fas fa-gavel me-2"></i>Navegación
+                    </div>
+                    <nav class="nav flex-column">
+                        <a class="nav-link active" href="#aceptacion"><i class="fas fa-check-circle"></i>Aceptación de
+                            Términos</a>
+                        <a class="nav-link" href="#servicios"><i class="fas fa-paint-brush"></i>Servicios y
+                            Productos</a>
+                        <a class="nav-link" href="#propiedad"><i class="fas fa-copyright"></i>Propiedad Intelectual</a>
+                        <a class="nav-link" href="#uso-contenido"><i class="fas fa-image"></i>Uso del Contenido</a>
+                        <a class="nav-link" href="#compras"><i class="fas fa-shopping-cart"></i>Compras y Pagos</a>
+                        <a class="nav-link" href="#envios"><i class="fas fa-shipping-fast"></i>Envíos y Entregas</a>
+                        <a class="nav-link" href="#devoluciones"><i class="fas fa-undo"></i>Devoluciones</a>
+                        <a class="nav-link" href="#responsabilidades"><i
+                                class="fas fa-exclamation-triangle"></i>Responsabilidades</a>
+                        <a class="nav-link" href="#terminacion"><i class="fas fa-ban"></i>Terminación</a>
+                        <a class="nav-link" href="#cambios"><i class="fas fa-sync-alt"></i>Cambios en los Términos</a>
+                    </nav>
+                </div>
+            </div>
+
+            <!-- Contenido -->
+            <div class="col-lg-9">
+                <div class="terms-card">
+                    <!-- ✅ NO MODIFICO TU CONTENIDO LEGAL -->
+                    <!-- Todo tu contenido de secciones se mantiene tal cual -->
+                    <!-- ⬇️ ⬇️ ⬇️ -->
+
+                    <!-- ✔️ Pegar todas tus secciones aquí (no hubo cambios en contenido) -->
+                    <!-- Desde el div id="aceptacion" hasta "Contacto y Soporte" -->
+
+                    <!-- ✅ ⬆️ Todo tu contenido original va aquí -->
+
+                    <div class="terms-section" id="aceptacion">
+                        <div class="terms-title">
+                            <i class="fas fa-check-circle"></i>
+                            1. Aceptación de los Términos
+                        </div>
+                        <div class="terms-content">
+                            Al acceder y utilizar los servicios de TecToons (el "Estudio"), usted acepta estar sujeto a
+                            estos Términos y Condiciones. Si no está de acuerdo con alguna parte de estos términos, no
+                            podrá utilizar nuestros servicios, productos o contenido.
+                        </div>
+                        <div class="highlight-box">
+                            <strong>Última actualización:</strong> 15 de Noviembre, 2023
+                        </div>
+                    </div>
+
+                    <div class="terms-section" id="servicios">
+                        <div class="terms-title">
+                            <i class="fas fa-paint-brush"></i>
+                            2. Servicios y Productos Ofrecidos
+                        </div>
+                        <div class="terms-content">
+                            TecToons ofrece los siguientes servicios y productos:
+                        </div>
+                        <ul class="terms-list">
+                            <li><strong>Servicios de Animación:</strong> Creación de contenido animado 2D y técnica
+                                tradigital</li>
+                            <li><strong>Diseño de Personajes:</strong> Desarrollo y conceptualización de personajes
+                                originales</li>
+                            <li><strong>Ilustración Personalizada:</strong> Creación de ilustraciones según
+                                especificaciones del cliente</li>
+                            <li><strong>Productos Físicos:</strong> Stickers, postales, collares, posters y amigurumis
+                            </li>
+                            <li><strong>Servicios de Diseño Gráfico:</strong> Afiches publicitarios, branding y
+                                materiales promocionales</li>
+                        </ul>
+                        <div class="terms-content">
+                            Todos los servicios están sujetos a disponibilidad y pueden requerir contratos específicos
+                            para proyectos complejos.
+                        </div>
+                    </div>
+
+                    <div class="terms-section" id="propiedad">
+                        <div class="terms-title">
+                            <i class="fas fa-copyright"></i>
+                            3. Propiedad Intelectual
+                        </div>
+                        <div class="terms-content">
+                            Todo el contenido creado por TecToons, incluyendo pero no limitado a personajes,
+                            animaciones, ilustraciones, diseños y conceptos artísticos, es propiedad exclusiva del
+                            Estudio.
+                        </div>
+                        <div class="warning-box">
+                            <strong>Importante:</strong> Los personajes Robuny y cualquier otro personaje original de
+                            TecToons están protegidos por derechos de autor. No se permite su uso comercial sin
+                            autorización expresa por escrito.
+                        </div>
+                        <div class="terms-content">
+                            Al contratar nuestros servicios, el cliente adquiere:
+                        </div>
+                        <ul class="terms-list">
+                            <li><strong>Licencia de uso</strong> para el proyecto específico contratado</li>
+                            <li><strong>Derechos de reproducción</strong> limitados al ámbito acordado</li>
+                            <li><strong>Atribución</strong> obligatoria en usos públicos del material</li>
+                        </ul>
+                        <div class="terms-content">
+                            Los derechos morales de autor siempre permanecen con TecToons.
+                        </div>
+                    </div>
+
+                    <div class="terms-section" id="uso-contenido">
+                        <div class="terms-title">
+                            <i class="fas fa-image"></i>
+                            4. Uso del Contenido y Materiales
+                        </div>
+                        <div class="terms-content">
+                            El contenido proporcionado por TecToons puede ser utilizado de la siguiente manera:
+                        </div>
+                        <ul class="terms-list">
+                            <li><strong>Uso Personal:</strong> Permitido para disfrute personal y no comercial</li>
+                            <li><strong>Uso Educativo:</strong> Permitido con atribución adecuada</li>
+                            <li><strong>Compartir en Redes Sociales:</strong> Permitido manteniendo la marca de agua y
+                                atribución</li>
+                        </ul>
+                        <div class="warning-box">
+                            <strong>Prohibido:</strong> Modificar, redistribuir con fines comerciales, eliminar marcas
+                            de agua o atribuciones, o utilizar el contenido para crear productos derivados sin
+                            autorización.
+                        </div>
+                    </div>
+
+                    <div class="terms-section" id="compras">
+                        <div class="terms-title">
+                            <i class="fas fa-shopping-cart"></i>
+                            5. Compras y Políticas de Pago
+                        </div>
+                        <div class="terms-content">
+                            Para servicios profesionales y productos físicos, aplican las siguientes políticas:
+                        </div>
+                        <ul class="terms-list">
+                            <li><strong>Presupuestos:</strong> Válidos por 30 días desde su emisión</li>
+                            <li><strong>Pagos:</strong> 50% al inicio del proyecto, 50% al finalizar</li>
+                            <li><strong>Métodos de Pago:</strong> Transferencia bancaria, PayPal, tarjetas de
+                                crédito/débito</li>
+                            <li><strong>Impuestos:</strong> Todos los precios incluyen IGV cuando aplica</li>
+                            <li><strong>Facturación:</strong> Proveemos facturas electrónicas para todos los servicios
+                            </li>
+                        </ul>
+                        <div class="highlight-box">
+                            Los proyectos no iniciarán hasta que se reciba el pago inicial. Los archivos finales se
+                            entregarán una vez completado el pago final.
+                        </div>
+                    </div>
+
+                    <div class="terms-section" id="envios">
+                        <div class="terms-title">
+                            <i class="fas fa-shipping-fast"></i>
+                            6. Envíos y Entregas
+                        </div>
+                        <div class="terms-content">
+                            <strong>Productos Físicos:</strong>
+                        </div>
+                        <ul class="terms-list">
+                            <li><strong>Tiempo de Envío:</strong> 3-7 días hábiles dentro de Lima, 7-15 días hábiles a
+                                provincias</li>
+                            <li><strong>Costos de Envío:</strong> Calculados al momento de la compra según ubicación
+                            </li>
+                            <li><strong>Seguimiento:</strong> Proporcionamos número de tracking para todos los envíos
+                            </li>
+                            <li><strong>Productos Digitales:</strong> Entrega inmediata vía email después de la
+                                confirmación de pago</li>
+                        </ul>
+                        <div class="terms-content">
+                            <strong>Servicios Creativos:</strong>
+                        </div>
+                        <ul class="terms-list">
+                            <li><strong>Tiempos de Entrega:</strong> Varían según la complejidad del proyecto</li>
+                            <li><strong>Revisiones:</strong> Incluimos 3 rondas de revisiones en todos los proyectos
+                            </li>
+                            <li><strong>Formato de Entrega:</strong> Archivos en formatos acordados previamente</li>
+                        </ul>
+                    </div>
+
+                    <div class="terms-section" id="devoluciones">
+                        <div class="terms-title">
+                            <i class="fas fa-undo"></i>
+                            7. Política de Devoluciones y Reembolsos
+                        </div>
+                        <div class="terms-content">
+                            <strong>Productos Físicos:</strong>
+                        </div>
+                        <ul class="terms-list">
+                            <li>Aceptamos devoluciones dentro de los 7 días posteriores a la recepción</li>
+                            <li>El producto debe estar en perfecto estado y en su empaque original</li>
+                            <li>Los costos de envío de devolución corren por cuenta del cliente</li>
+                            <li>No aceptamos devoluciones de productos personalizados</li>
+                        </ul>
+                        <div class="terms-content">
+                            <strong>Servicios Creativos:</strong>
+                        </div>
+                        <ul class="terms-list">
+                            <li>El pago inicial no es reembolsable una vez iniciado el trabajo</li>
+                            <li>En caso de cancelación del proyecto, se facturará el trabajo realizado hasta la fecha
+                            </li>
+                            <li>No realizamos reembolsos por desacuerdos creativos subjetivos</li>
+                        </ul>
+                    </div>
+
+                    <div class="terms-section" id="responsabilidades">
+                        <div class="terms-title">
+                            <i class="fas fa-exclamation-triangle"></i>
+                            8. Limitación de Responsabilidad
+                        </div>
+                        <div class="terms-content">
+                            TecToons no será responsable por:
+                        </div>
+                        <ul class="terms-list">
+                            <li>Daños indirectos, incidentales o consecuentes</li>
+                            <li>Pérdida de datos o información</li>
+                            <li>Retrasos causados por factores fuera de nuestro control</li>
+                            <li>Uso indebido del contenido por parte del cliente</li>
+                            <li>Cambios en los plazos por revisiones no solicitadas a tiempo</li>
+                        </ul>
+                        <div class="highlight-box">
+                            Nuestra responsabilidad máxima en cualquier reclamación será limitada al monto total pagado
+                            por el servicio en cuestión.
+                        </div>
+                    </div>
+
+                    <div class="terms-section" id="terminacion">
+                        <div class="terms-title">
+                            <i class="fas fa-ban"></i>
+                            9. Terminación del Servicio
+                        </div>
+                        <div class="terms-content">
+                            Podemos suspender o terminar el acceso a nuestros servicios si:
+                        </div>
+                        <ul class="terms-list">
+                            <li>Usted viola estos términos y condiciones</li>
+                            <li>No realiza los pagos en los tiempos establecidos</li>
+                            <li>Utiliza nuestro contenido de manera no autorizada</li>
+                            <li>Realiza actividades que puedan dañar nuestra reputación</li>
+                        </ul>
+                        <div class="terms-content">
+                            En caso de terminación, cualquier cantidad adeudada se volverá inmediatamente exigible.
+                        </div>
+                    </div>
+
+                    <div class="terms-section" id="cambios">
+                        <div class="terms-title">
+                            <i class="fas fa-sync-alt"></i>
+                            10. Cambios en los Términos y Condiciones
+                        </div>
+                        <div class="terms-content">
+                            Nos reservamos el derecho de modificar estos términos en cualquier momento. Los cambios
+                            entrarán en vigor inmediatamente después de su publicación en nuestro sitio web.
+                        </div>
+                        <div class="terms-content">
+                            Notificaremos sobre cambios significativos a través de:
+                        </div>
+                        <ul class="terms-list">
+                            <li>Nuestro sitio web oficial</li>
+                            <li>Comunicación por email a clientes activos</li>
+                            <li>Anuncios en nuestras redes sociales</li>
+                        </ul>
+                        <div class="highlight-box">
+                            El uso continuado de nuestros servicios después de cualquier cambio constituye la aceptación
+                            de los nuevos términos.
+                        </div>
+                    </div>
+
+                    <div class="terms-section">
+                        <div class="terms-title">
+                            <i class="fas fa-headset"></i>
+                            Contacto y Soporte
+                        </div>
+                        <div class="terms-content">
+                            Para preguntas sobre estos términos y condiciones, contáctenos:
+                        </div>
+                        <ul class="terms-list">
+                            <li><strong>Email:</strong> legal@tectoons.com</li>
+                            <li><strong>Asuntos Legales:</strong> derechos@tectoons.com</li>
+                            <li><strong>Horario de Atención:</strong> Lunes a Viernes de 9:00 AM a 6:00 PM</li>
+                        </ul>
+                        <div class="terms-content">
+                            Nos comprometemos a responder todas las consultas legales dentro de los 5 días hábiles.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+    <div th:replace="fragments/footer :: footer"></div>
+
+    <!-- ✅ Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js">
+    </script>
+    <script th:src="@{/js/terminos-condiciones.main.js}"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Boleta - TecToons</title>
+    <link rel="icon" th:href="@{/img/logotectoons4.png}" type="image/png">
+
+    <!-- Bootstrap 5 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+    <link rel="stylesheet" th:href="@{/css/boleta.css}">
+
+</head>
+
+<body>
+    <div th:replace="fragments/navbar :: navbar"></div>
+
+    <div class="container my-5 boleta-container">
+
+        <h1 class="boleta-title">Boleta de Pedido</h1>
+
+        <div th:if="${pedido != null}">
+
+            <div class="boleta-info">
+                <p><strong>ID del Pedido:</strong> <span th:text="${pedido.id}"></span></p>
+                <p><strong>Fecha:</strong>
+                    <span th:text="${#temporals.format(pedido.fechaCreacion, 'dd/MM/yyyy HH:mm')}"></span>
+                </p>
+                <p><strong>Cliente:</strong> <span th:text="${pedido.usuario.nombreCompleto}"></span></p>
+                <p><strong>Estado:</strong> <span th:text="${pedido.estado}"></span></p>
+            </div>
+
+            <table class="table table-bordered mt-3 boleta-table">
+                <thead>
+                    <tr>
+                        <th>Producto</th>
+                        <th>Precio Unitario</th>
+                        <th>Cantidad</th>
+                        <th>Subtotal</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="item : ${pedido.items}">
+                        <td th:text="${item.producto.titulo}"></td>
+                        <td th:text="'S/ ' + ${item.precioUnitario}"></td>
+                        <td th:text="${item.cantidad}"></td>
+                        <td th:text="'S/ ' + ${item.precioUnitario * item.cantidad}"></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h4 class="text-end boleta-total">
+                Total: <span th:text="'S/ ' + ${pedido.total}"></span>
+            </h4>
+
+            <a href="/tienda" class="btn btn-tienda mt-3">Seguir Comprando</a>
+        </div>
+
+        <div th:if="${pedido == null}">
+            <p class="text-danger fw-bold">Pedido no encontrado.</p>
+            <a href="/tienda" class="btn btn-tienda mt-3">Ir a la tienda</a>
+        </div>
+
+    </div>
+
+
+    <div th:replace="fragments/footer :: footer"></div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Panel del Artista - Gestionar Obras</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+
+
+    <link rel="icon" th:href="@{/img/logotectoonsartista2.png}" type="image/png">
+    <!-- CSS principal -->
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+    <link rel="stylesheet" th:href="@{/css/panel.main.css}">
+
+
+</head>
+
+<body class="bg-light">
+    <div th:replace="fragments/navbar-artista :: navbar-artista"></div>
+
+    <div class="container py-4">
+
+        <!-- ALERTAS DINÁMICAS -->
+        <div id="alertContainer" class="mb-3"></div>
+
+        <h2 class="text-center mb-4 fw-bold">🎨 Panel de Gestión de Obras</h2>
+
+        <!-- Barra superior -->
+        <div class="d-flex justify-content-between align-items-center mb-3 gap-2">
+            <!-- Buscador -->
+            <input type="text" id="buscarInput" class="form-control flex-grow-1" placeholder="🔍 Buscar por título…">
+
+            <!-- Filtro categoría -->
+            <select id="filtroCategoria" class="form-select w-auto">
+                <option value="all">Todos</option>
+                <option value="Ilustración">Ilustración</option>
+                <option value="Personajes">Personajes</option>
+                <option value="Animación">Animación</option>
+                <option value="Estilizado">Estilizado</option>
+                <option value="Escenarios">Escenarios</option>
+            </select>
+
+            <!-- Crear obra -->
+            <button class="btn btn-primary" onclick="abrirModalCrear()">
+                ➕ Nueva Obra
+            </button>
+        </div>
+
+
+        <!-- Tabla -->
+        <div class="card shadow p-3">
+            <table class="table table-hover align-middle text-center" id="tablaObras">
+                <thead class="table-dark">
+                    <tr>
+                        <th>ID</th>
+                        <th onclick="ordenarPor('titulo')" class="pointer">Título <i class="bi bi-arrow-down-up"></i>
+                        </th>
+                        <th onclick="ordenarPor('categoria')" class="pointer">Categoría <i
+                                class="bi bi-arrow-down-up"></i></th>
+                        <th>Imagen</th>
+                        <th onclick="ordenarPor('totalLikes')" class="pointer">Likes <i class="bi bi-arrow-down-up"></i>
+                        </th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+
+
+                <tbody id="tbodyObras"></tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- ========================================================= -->
+    <!-- MODAL CREAR / EDITAR -->
+    <!-- ========================================================= -->
+    <div class="modal fade" id="modalObra" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <h5 id="modalTitulo" class="modal-title"></h5>
+                    <button class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+
+                <div class="modal-body">
+
+                    <form id="formObra" novalidate>
+
+                        <input type="hidden" id="obraId">
+                        <input type="hidden" id="obraOriginal">
+
+                        <div class="mb-3">
+                            <label class="form-label fw-bold">Título *</label>
+                            <input type="text" id="titulo" class="form-control" required>
+                            <div class="invalid-feedback">El título es obligatorio</div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label fw-bold">Descripción *</label>
+                            <textarea id="descripcion" class="form-control" required></textarea>
+                            <div class="invalid-feedback">La descripción es obligatoria</div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label fw-bold">Categoría *</label>
+                            <select id="categoria" class="form-select" required>
+                                <option value="">Seleccionar...</option>
+                                <option value="Ilustración">Ilustración</option>
+                                <option value="Personajes">Personajes</option>
+                                <option value="Animación">Animación</option>
+                                <option value="Estilizado">Estilizado</option>
+                                <option value="Escenarios">Escenarios</option>
+                            </select>
+                            <div class="invalid-feedback">Seleccione una categoría</div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label fw-bold">Imagen URL *</label>
+                            <input type="text" id="imagenUrl" class="form-control" required>
+                            <div class="invalid-feedback">Debe ingresar una imagen</div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label fw-bold">Video URL (Opcional)</label>
+                            <input type="text" id="videoUrl" class="form-control">
+                        </div>
+
+                    </form>
+
+                </div>
+
+                <div class="modal-footer">
+
+                    <button class="btn btn-outline-secondary" onclick="restaurarValores()" id="btnRestaurar" hidden>
+                        Restaurar valores
+                    </button>
+
+                    <button class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button class="btn btn-success" onclick="guardarObra()">Guardar</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+    <!-- ========================================================= -->
+    <!-- MODAL PREVIEW -->
+    <!-- ========================================================= -->
+    <div class="modal fade" id="modalPreview" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content shadow-lg border-0">
+
+                <div class="modal-header bg-dark text-white">
+                    <h5 class="modal-title">Vista previa</h5>
+                    <button class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+
+                <div class="modal-body text-center">
+                    <img id="previewImg" class="preview-modal-img img-fluid rounded shadow">
+                    <h4 class="mt-3" id="previewTitulo"></h4>
+                    <span class="badge bg-primary" id="previewCat"></span>
+                </div>
+
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+    <!-- ========================================================= -->
+    <!-- MODAL CONFIRMACIÓN ELIMINAR -->
+    <!-- ========================================================= -->
+    <div class="modal fade" id="modalEliminar" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <div class="modal-header bg-danger text-white">
+                    <h5 class="modal-title">Confirmar eliminación</h5>
+                    <button class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+
+                <div class="modal-body">
+                    ¿Deseas eliminar esta obra?
+                    <input type="hidden" id="eliminarId">
+                </div>
+
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button class="btn btn-danger" onclick="confirmarEliminar()">Eliminar</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div th:replace="fragments/footer :: footer"></div>
+
+    <!-- Bootstrap -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+
+    <script>
+        let modal, modalPreview, modalEliminar;
+        let ordenarAsc = true;
+        let obras = [];
+        let listaFiltrada = []; // Lista filtrada y ordenada
+
+        document.addEventListener("DOMContentLoaded", () => {
+            modal = new bootstrap.Modal('#modalObra');
+            modalPreview = new bootstrap.Modal('#modalPreview');
+            modalEliminar = new bootstrap.Modal('#modalEliminar');
+
+            cargarObras();
+
+            document.getElementById("buscarInput").addEventListener("input", filtrarBusqueda);
+            document.getElementById("filtroCategoria").addEventListener("change", filtrarBusqueda);
+        });
+
+        /* =======================================================
+           CARGAR OBRAS Y PRECARGAR LIKES
+        ======================================================= */
+        async function cargarObras() {
+            let data = await fetch(`/api/obras/artista/mis-obras`).then(r => r.json());
+
+            for (let obra of data) {
+                obra.totalLikes = await fetch(`/api/likes/count/${obra.id}`)
+                    .then(r => r.json())
+                    .then(r => r.totalLikes);
+            }
+
+            obras = data;
+            listaFiltrada = [...obras]; // Inicialmente sin filtrar
+            mostrarTabla(listaFiltrada);
+        }
+
+        /* =======================================================
+           MOSTRAR TABLA
+        ======================================================= */
+        function mostrarTabla(lista) {
+            let html = "";
+
+            for (let i = 0; i < lista.length; i++) {
+                const o = lista[i];
+
+                html += `
+        <tr class="pointer" onmouseover="this.classList.add('table-active')" 
+            onmouseout="this.classList.remove('table-active')">
+
+            <td>${i + 1}</td>
+
+            <td>${o.titulo}</td>
+
+            <td>
+                <span class="badge bg-${badgeCategoria(o.categoria)}">
+                    ${o.categoria}
+                </span>
+            </td>
+
+            <td>
+                <img src="${o.imagenUrl}" class="img-thumbnail" style="width: 80px; border-radius: 10px;">
+            </td>
+
+            <td>${o.totalLikes}</td>
+
+            <td>
+                <button class="btn btn-info btn-sm me-1" onclick="verPreview(${o.id})">👁️</button>
+                <button class="btn btn-warning btn-sm me-1" onclick="editarObra(${o.id})">✏️</button>
+                <button class="btn btn-secondary btn-sm me-1" onclick="duplicarObra(${o.id})">📄</button>
+                <button class="btn btn-danger btn-sm" onclick="abrirModalEliminar(${o.id})">🗑️</button>
+            </td>
+        </tr>
+        `;
+            }
+
+            document.getElementById("tbodyObras").innerHTML = html;
+        }
+
+        /* =======================================================
+           COLORES DE CATEGORÍA
+        ======================================================= */
+        function badgeCategoria(cat) {
+            return {
+                "Ilustración": "primary",
+                "Personajes": "success",
+                "Animación": "warning",
+                "Estilizado": "info",
+                "Escenarios": "dark"
+            }[cat] || "secondary";
+        }
+
+        /* =======================================================
+           FILTRADO + ORDENAMIENTO
+        ======================================================= */
+        function filtrarBusqueda() {
+            let texto = document.getElementById("buscarInput").value.toLowerCase();
+            let categoria = document.getElementById("filtroCategoria").value;
+
+            listaFiltrada = obras.filter(o => {
+                let matchesTitulo = o.titulo.toLowerCase().includes(texto);
+                let matchesCategoria = categoria === "all" || o.categoria === categoria;
+                return matchesTitulo && matchesCategoria;
+            });
+
+            mostrarTabla(listaFiltrada);
+        }
+
+        function ordenarPor(campo) {
+            listaFiltrada.sort((a, b) => {
+                let valA = a[campo];
+                let valB = b[campo];
+
+                if (typeof valA === "string") valA = valA.toLowerCase();
+                if (typeof valB === "string") valB = valB.toLowerCase();
+
+                if (!isNaN(valA) && !isNaN(valB)) {
+                    return ordenarAsc ? valA - valB : valB - valA;
+                }
+
+                if (valA < valB) return ordenarAsc ? -1 : 1;
+                if (valA > valB) return ordenarAsc ? 1 : -1;
+                return 0;
+            });
+
+            ordenarAsc = !ordenarAsc;
+            mostrarTabla(listaFiltrada);
+        }
+
+        /* =======================================================
+           MODAL CREAR
+        ======================================================= */
+        function abrirModalCrear() {
+            document.getElementById("modalTitulo").innerText = "Nueva Obra";
+            document.getElementById("formObra").reset();
+            document.getElementById("obraId").value = "";
+            document.getElementById("btnRestaurar").hidden = true;
+            modal.show();
+        }
+
+        /* =======================================================
+           EDITAR
+        ======================================================= */
+        function editarObra(id) {
+            fetch(`/api/obras/${id}`)
+                .then(r => r.json())
+                .then(o => {
+                    document.getElementById("modalTitulo").innerText = "Editar Obra";
+
+                    document.getElementById("obraId").value = o.id;
+                    document.getElementById("titulo").value = o.titulo;
+                    document.getElementById("descripcion").value = o.descripcion;
+                    document.getElementById("categoria").value = o.categoria;
+                    document.getElementById("imagenUrl").value = o.imagenUrl;
+                    document.getElementById("videoUrl").value = o.videoUrl ?? "";
+
+                    document.getElementById("obraOriginal").value = JSON.stringify(o);
+
+                    document.getElementById("btnRestaurar").hidden = false;
+
+                    modal.show();
+                });
+        }
+
+        /* =======================================================
+           RESTAURAR EDICIÓN
+        ======================================================= */
+        function restaurarValores() {
+            let o = JSON.parse(document.getElementById("obraOriginal").value);
+
+            document.getElementById("titulo").value = o.titulo;
+            document.getElementById("descripcion").value = o.descripcion;
+            document.getElementById("categoria").value = o.categoria;
+            document.getElementById("imagenUrl").value = o.imagenUrl;
+            document.getElementById("videoUrl").value = o.videoUrl ?? "";
+        }
+
+        /* =======================================================
+           PREVIEW
+        ======================================================= */
+        function verPreview(id) {
+            const o = obras.find(x => x.id === id);
+
+            document.getElementById("previewImg").src = o.imagenUrl;
+            document.getElementById("previewTitulo").innerText = o.titulo;
+            document.getElementById("previewCat").innerText = o.categoria;
+
+            modalPreview.show();
+        }
+
+        /* =======================================================
+           DUPLICAR
+        ======================================================= */
+        function duplicarObra(id) {
+            const o = obras.find(x => x.id === id);
+
+            const copia = {
+                titulo: o.titulo + " (Copia)",
+                descripcion: o.descripcion,
+                categoria: o.categoria,
+                imagenUrl: o.imagenUrl,
+                videoUrl: o.videoUrl
+            };
+
+            fetch(`/api/obras`, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(copia)
+            })
+                .then(() => {
+                    mostrarAlerta("Obra duplicada", "success");
+                    cargarObras();
+                });
+        }
+
+        /* =======================================================
+           ELIMINAR
+        ======================================================= */
+        function abrirModalEliminar(id) {
+            document.getElementById("eliminarId").value = id;
+            modalEliminar.show();
+        }
+
+        function confirmarEliminar() {
+            const id = document.getElementById("eliminarId").value;
+
+            fetch(`/api/obras/${id}`, { method: "DELETE" })
+                .then(() => {
+                    modalEliminar.hide();
+                    mostrarAlerta("Obra eliminada correctamente", "danger");
+                    cargarObras();
+                });
+        }
+
+        /* =======================================================
+           GUARDAR / VALIDAR
+        ======================================================= */
+        function guardarObra() {
+            const form = document.getElementById("formObra");
+
+            if (!form.checkValidity()) {
+                form.classList.add("was-validated");
+                mostrarAlerta("Complete los campos requeridos", "warning");
+                return;
+            }
+
+            let id = document.getElementById("obraId").value;
+
+            const obra = {
+                titulo: titulo.value,
+                descripcion: descripcion.value,
+                categoria: categoria.value,
+                imagenUrl: imagenUrl.value,
+                videoUrl: videoUrl.value
+            };
+
+            const method = id ? "PUT" : "POST";
+            const url = id ? `/api/obras/${id}` : `/api/obras`;
+
+            fetch(url, {
+                method,
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(obra)
+            })
+                .then(() => {
+                    modal.hide();
+                    mostrarAlerta(id ? "Obra actualizada" : "Obra creada", "success");
+                    cargarObras();
+                });
+        }
+
+        /* =======================================================
+           ALERTAS BONITAS
+        ======================================================= */
+        function mostrarAlerta(mensaje, tipo) {
+            const cont = document.getElementById("alertContainer");
+
+            cont.innerHTML = `
+    <div class="alert alert-${tipo} alert-dismissible fade show">
+        ${mensaje}
+        <button class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
+`;
+        }
+
+    </script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Blog | TECTOONS</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+    <link rel="icon" th:href="@{/img/logotectoons4.png}" type="image/png">
+
+    <!-- Bootstrap 5 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+    <!-- Animate.css -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+
+    <style>
+        body {
+            background: linear-gradient(120deg, #eef2f7, #f8f9fc);
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .blog-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .blog-header h1 {
+            font-weight: 700;
+            font-size: 2.8rem;
+            color: #1a1c2c;
+        }
+
+        .blog-header p {
+            color: #6c757d;
+            font-size: 1.1rem;
+        }
+
+        .post-card {
+            border-radius: 16px;
+            overflow: hidden;
+            backdrop-filter: blur(6px);
+            background: rgba(255, 255, 255, 0.9);
+            transition: .35s ease;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, .06);
+            border: 1px solid rgba(255, 255, 255, .4);
+        }
+
+        .post-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 26px rgba(0, 0, 0, .12);
+        }
+
+        .post-img {
+            height: 230px;
+            width: 100%;
+            object-fit: cover;
+            transition: .4s;
+        }
+
+        .post-card:hover .post-img {
+            transform: scale(1.04);
+        }
+
+        .post-title {
+            font-size: 1.35rem;
+            font-weight: 600;
+            color: #1a1c2c;
+            line-height: 1.3;
+        }
+
+        .post-meta {
+            font-size: .9rem;
+            color: #8a8e99;
+        }
+
+        .post-description {
+            font-size: .95rem;
+            color: #6c757d;
+        }
+
+        /* Etiqueta flotante */
+        .post-tag {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background: #1a56db;
+            color: white;
+            padding: 4px 12px;
+            font-size: .8rem;
+            border-radius: 50px;
+            font-weight: 500;
+            box-shadow: 0 3px 8px rgba(0, 0, 0, .15);
+        }
+    </style>
+</head>
+
+<body>
+    <div th:replace="fragments/navbar :: navbar"></div>
+
+    <div class="container py-5">
+
+        <!-- HEADER -->
+        <!-- HEADER CARRUSEL ARTÍSTICO -->
+        <div id="blogHeaderCarousel" class="carousel slide mb-5" data-bs-ride="carousel">
+            <div class="carousel-inner">
+
+                <!-- SLIDE 1 -->
+                <div class="carousel-item active">
+                    <div class="header-slide d-flex flex-column justify-content-center align-items-center text-center">
+                        <div class="glass-box p-4">
+                            <h1 class="fw-bold display-5">Blog de Novedades</h1>
+                            <p class="mt-2">
+                                Explora anuncios, proyectos creativos y lanzamientos especiales de nuestra comunidad
+                                artística.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SLIDE 2 -->
+                <div class="carousel-item">
+                    <div class="header-slide d-flex flex-column justify-content-center align-items-center text-center">
+                        <div class="glass-box p-4">
+                            <h1 class="fw-bold display-5">Nuevas Obras y Actualizaciones</h1>
+                            <p class="mt-2">
+                                Mantente al día con los nuevos dibujos, estilos y procesos creativos de nuestros
+                                artistas.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SLIDE 3 -->
+                <div class="carousel-item">
+                    <div class="header-slide d-flex flex-column justify-content-center align-items-center text-center">
+                        <div class="glass-box p-4">
+                            <h1 class="fw-bold display-5">Anuncios Especiales</h1>
+                            <p class="mt-2">
+                                Descubre mejoras, eventos, talleres y novedades exclusivas de TECTOONS.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- CONTROLES -->
+            <button class="carousel-control-prev" type="button" data-bs-target="#blogHeaderCarousel"
+                data-bs-slide="prev">
+                <span class="carousel-control-prev-icon"></span>
+            </button>
+
+            <button class="carousel-control-next" type="button" data-bs-target="#blogHeaderCarousel"
+                data-bs-slide="next">
+                <span class="carousel-control-next-icon"></span>
+            </button>
+        </div>
+
+        <!-- ESTILOS -->
+        <style>
+            /* Fondo dinámico estilo artístico */
+            .header-slide {
+                height: 330px;
+                padding: 40px;
+                background: linear-gradient(120deg, #0d1b3d, #132a63, #1b3f8b);
+                background-size: 300% 300%;
+                animation: gradientMove 12s ease infinite;
+                color: #fff;
+            }
+
+            /* Efecto vidrio (glassmorphism) */
+            .glass-box {
+                background: rgba(255, 255, 255, 0.12);
+                backdrop-filter: blur(10px);
+                border-radius: 18px;
+                border: 1px solid rgba(255, 255, 255, 0.2);
+                max-width: 700px;
+                animation: fadeIn 1.2s;
+            }
+
+            /* Animación del fondo */
+            @keyframes gradientMove {
+                0% {
+                    background-position: 0% 50%;
+                }
+
+                50% {
+                    background-position: 100% 50%;
+                }
+
+                100% {
+                    background-position: 0% 50%;
+                }
+            }
+
+            /* Aparición suave */
+            @keyframes fadeIn {
+                from {
+                    opacity: 0;
+                    transform: translateY(20px);
+                }
+
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+        </style>
+
+        <!-- POSTS -->
+        <div class="row g-4">
+
+            <div class="col-md-4" th:each="post : ${posts}">
+                <a th:href="@{'/blog/' + ${post.id}}" class="text-decoration-none">
+
+                    <div class="post-card position-relative">
+
+                        <!-- Etiqueta -->
+                        <div class="post-tag">Novedad</div>
+
+                        <img th:src="${post.imagenUrl}" class="post-img">
+
+                        <div class="p-3">
+                            <h2 class="post-title" th:text="${post.titulo}"></h2>
+
+                            <div class="post-meta mt-1">
+                                <span th:text="'Por ' + ${post.artista.nombreArtistico}"></span> ·
+                                <span th:text="${post.fechaPublicacion}"></span>
+                            </div>
+
+                            <p class="post-description mt-2 text-truncate" th:text="${post.contenido}"></p>
+                        </div>
+
+                    </div>
+
+                </a>
+            </div>
+
+        </div>
+    </div>
+    <!-- Footer -->
+    <div th:replace="fragments/footer :: footer"></div>
+    <script th:src="@{https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js}"></script>
+
+</body>
+
+</html>

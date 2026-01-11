@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="${producto.titulo} + ' - TecToons'">Detalle Producto</title>
+    <link rel="icon" th:href="@{/img/logotectoons4.png}" type="image/png">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+    <link rel="stylesheet" th:href="@{/css/detalle-producto.css}">
+
+</head>
+
+<body>
+    <div th:replace="fragments/navbar :: navbar"></div>
+
+<div class="container my-5 producto-container">
+    <div class="row">
+        <!-- Imagen -->
+        <div class="col-md-6 d-flex justify-content-center align-items-center">
+            <img th:src="${producto.imagenUrl}" th:alt="${producto.titulo}" class="img-fluid producto-img">
+        </div>
+
+        <!-- Informacion -->
+        <div class="col-md-6 mt-4 mt-md-0">
+            <h2 class="producto-titulo" th:text="${producto.titulo}"></h2>
+            <h4 class="producto-precio" th:text="'S/ ' + ${producto.precio}"></h4>
+
+            <p class="producto-descripcion" th:text="${producto.descripcion}"></p>
+
+            <div class="producto-info">
+                <p><strong>Categoría:</strong> <span th:text="${producto.categoria}"></span></p>
+                <p><strong>Stock disponible:</strong> <span th:text="${producto.stock}"></span></p>
+            </div>
+
+            <!-- Contenedor de botones -->
+            <div class="d-flex gap-3 flex-wrap mt-3">
+
+                <!-- Boton si esta logueado -->
+                <form th:action="@{'/carrito/agregar/' + ${producto.id}}" method="post" th:if="${logueado}">
+                    <button type="submit" class="btn btn-carrito">Agregar al carrito</button>
+                </form>
+
+                <!-- Boton si NO esta logueado -->
+                <button type="button" class="btn btn-carrito" th:if="${!logueado}" data-bs-toggle="modal"
+                        data-bs-target="#loginRequiredModal">
+                    Agregar al carrito
+                </button>
+
+                <a th:href="@{/tienda}" class="btn btn-volver">
+                    Volver a la tienda
+                </a>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+    <!-- Footer -->
+    <div th:replace="fragments/footer :: footer"></div>
+    <div th:replace="fragments/modals :: loginRequiredModal"></div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

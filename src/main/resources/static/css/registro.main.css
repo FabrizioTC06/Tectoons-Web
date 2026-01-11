@@ -1,0 +1,107 @@
+/* ===== Fondo con gradiente y fondo de imagen ===== */
+.register-bg {
+  background:
+    linear-gradient(rgba(45, 70, 150, 0.8), rgba(70, 40, 120, 0.8)),
+    url("../img/fondo-login3.jpg") no-repeat center center/cover;
+  min-height: 100vh;
+  position: relative;
+}
+
+/* ===== Header superior ===== */
+.header {
+  position: absolute;
+  top: 20px;
+  left: 40px;
+  display: flex;
+  align-items: center;
+  z-index: 10;
+}
+
+.logo {
+  width: 60px;
+  height: auto;
+}
+
+.brand-name {
+  color: white;
+  font-weight: 700;
+  font-size: 1.8rem;
+  letter-spacing: 1px;
+}
+
+.brand-name .highlight {
+  color: #facc15;
+}
+
+/* ===== Tarjeta principal ===== */
+.register-card {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  width: 100%;
+  max-width: 420px;
+}
+
+/* ===== Inputs ===== */
+.form-control {
+  border-radius: 10px;
+  border: none;
+  padding: 12px;
+  background: rgba(255, 255, 255, 0.15);
+  color: white;
+}
+
+.form-control::placeholder {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+/* ===== Botón ===== */
+.register-btn {
+  background-color: #facc15;
+  color: #1e1e1e;
+  border-radius: 10px;
+  padding: 12px;
+  transition: all 0.3s ease;
+  font-size: 1rem;
+}
+
+.register-btn:hover {
+  background-color: #ffdd33;
+  transform: translateY(-2px);
+}
+
+/* ===== Responsividad ===== */
+@media (max-width: 768px) {
+  .logo {
+    width: 50px;
+  }
+
+  .brand-name {
+    font-size: 1.5rem;
+  }
+
+  .register-card {
+    margin-top: 3rem;
+    padding: 2rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .header {
+    top: 10px;
+    left: 20px;
+  }
+
+  .logo {
+    width: 45px;
+  }
+
+  .brand-name {
+    font-size: 1.3rem;
+  }
+
+  .register-card {
+    margin: 0 15px;
+    padding: 2rem 1.5rem;
+  }
+}

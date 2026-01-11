@@ -1,0 +1,107 @@
+#carrito-container h1 {
+    font-weight: 700;
+    color: #2f54eb;
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+#carrito-table {
+    background: #fff;
+    border-radius: 18px;
+    overflow: hidden;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+}
+
+#carrito-table thead {
+    background: #eef2ff;
+    color: #2f3d91;
+    font-weight: 600;
+}
+
+#carrito-table tbody tr {
+    transition: background 0.2s ease;
+}
+
+#carrito-table tbody tr:hover {
+    background: #f7f9ff;
+}
+
+#carrito-table td {
+    padding: 18px 14px !important;
+    vertical-align: middle;
+}
+
+.btn-success {
+    background: #52c41a !important;
+    border: none !important;
+}
+
+.btn-success:hover {
+    background: #45a315 !important;
+}
+
+.btn-warning {
+    background: #faad14 !important;
+    border: none !important;
+}
+
+.btn-warning:hover {
+    background: #e69a0d !important;
+}
+
+.btn-danger {
+    background: #ff4d4f !important;
+    border: none !important;
+}
+
+.btn-danger:hover {
+    background: #e04345 !important;
+}
+
+#carrito-table button {
+    border-radius: 8px;
+    padding: 4px 10px !important;
+    font-weight: 600;
+}
+
+.total-box {
+    margin-top: 25px;
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: #1e2a78;
+}
+
+.btn-pagar {
+    padding: 14px 26px;
+    background: linear-gradient(135deg, #2f54eb, #597ef7);
+    border: none !important;
+    font-size: 1.2rem;
+    border-radius: 14px;
+    font-weight: 600;
+    transition: 0.25s ease;
+}
+
+.btn-pagar:hover {
+    background: linear-gradient(135deg, #1d39c4, #3c6df5);
+}
+
+.empty-box {
+    background: #fff;
+    padding: 30px;
+    border-radius: 18px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+    text-align: center;
+}
+
+.modal-header.bg-danger {
+    background: #ff4d4f !important;
+}
+
+.modal-content {
+    border-radius: 16px;
+    overflow: hidden;
+}
+
+.modal-footer button {
+    border-radius: 10px;
+}

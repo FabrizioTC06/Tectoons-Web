@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+
+<!-- MODAL: Requiere inicio de sesión -->
+<div th:fragment="loginRequiredModal">
+    <div class="modal fade" id="loginRequiredModal" tabindex="-1" aria-labelledby="loginRequiredLabel"
+         aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content border-0 shadow-lg rounded-4">
+
+                <div class="modal-header bg-danger text-white rounded-top-4">
+                    <h5 class="modal-title" id="loginRequiredLabel">Inicia sesión</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+
+                <div class="modal-body text-center p-4">
+                    <i class="bi bi-person-lock display-4 text-danger mb-3"></i>
+                    <p class="fw-semibold">Necesitas iniciar sesión para realizar esta acción.</p>
+                </div>
+
+                <div class="modal-footer justify-content-center">
+                    <a href="/usuario/login" class="btn btn-primary px-4">Iniciar sesión</a>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

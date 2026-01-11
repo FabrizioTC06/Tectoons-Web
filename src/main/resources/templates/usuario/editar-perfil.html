@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Perfil</title>
+    <link rel="icon" th:href="@{/img/logotectoons4.png}" type="image/png">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+    <link rel="stylesheet" th:href="@{/css/editar-perfil.css}">
+
+</head>
+
+<body class="bg-light">
+    <div th:replace="fragments/navbar :: navbar"></div>
+
+    <div class="container py-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-7 col-md-9">
+
+                <div class="edit-profile-card shadow-lg rounded-4">
+
+                    <!-- Encabezado -->
+                    <div class="edit-profile-header text-white d-flex align-items-center">
+                        <h3 class="m-0 fw-bold">Editar Perfil</h3>
+                    </div>
+
+                    <div class="p-4">
+
+                        <!-- Alertas -->
+                        <div th:if="${exito}" class="alert alert-success" th:text="${exito}"></div>
+                        <div th:if="${error}" class="alert alert-danger" th:text="${error}"></div>
+
+                        <form th:action="@{/usuario/editar-perfil}" th:object="${usuario}" method="post">
+
+                            <!-- Banner -->
+                            <div class="mb-4">
+                                <label class="form-label fw-semibold">Banner del perfil</label>
+                                <input type="text" class="form-control" th:field="*{bannerPerfil}"
+                                    placeholder="URL del banner">
+                            </div>
+
+                            <!-- Foto de perfil con vista previa -->
+                            <div class="text-center mb-4">
+                                <div class="profile-edit-img-wrapper mx-auto">
+                                    <img th:src="${usuario.fotoPerfil != null ? usuario.fotoPerfil : '/img/default-profile.png'}"
+                                        alt="Foto" class="profile-edit-img shadow">
+                                </div>
+
+                                <input type="text" class="form-control mt-3 w-75 mx-auto" th:field="*{fotoPerfil}"
+                                    placeholder="URL de foto de perfil">
+                            </div>
+
+                            <!-- Campos -->
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">Nombre completo</label>
+                                    <input type="text" class="form-control" th:field="*{nombreCompleto}" required>
+                                </div>
+
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">Usuario</label>
+                                    <input type="text" class="form-control" th:field="*{nombreUsuario}" required>
+                                </div>
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label">Correo electrónico</label>
+                                <input type="email" class="form-control" th:field="*{correo}" required>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">Fecha de nacimiento</label>
+                                    <input type="date" class="form-control" th:field="*{fechaNacimiento}">
+                                </div>
+
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">Celular</label>
+                                    <input type="text" class="form-control" th:field="*{celular}" pattern="\d{9}"
+                                        placeholder="912345678">
+                                </div>
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label">Ubicación</label>
+                                <input type="text" class="form-control" th:field="*{ubicacion}">
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label">Descripción</label>
+                                <textarea class="form-control" rows="3" th:field="*{descripcion}"
+                                    placeholder="Algo sobre ti..."></textarea>
+                            </div>
+
+                            <!-- Contraseña -->
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">Nueva contraseña</label>
+                                    <input type="password" class="form-control" th:field="*{contrasena}">
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">Repetir contraseña</label>
+                                    <input type="password" class="form-control" name="repetirContrasena">
+                                </div>
+                            </div>
+
+                            <!-- Botones -->
+                            <div class="d-flex justify-content-between mt-4">
+                                <a href="/usuario/perfil" class="btn btn-outline-secondary px-4 py-2 btn-lg">
+                                    ← Volver
+                                </a>
+                                <button type="submit" class="btn btn-success px-4 py-2 btn-lg">
+                                    Guardar cambios
+                                </button>
+                            </div>
+
+                        </form>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div th:replace="fragments/footer :: footer"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

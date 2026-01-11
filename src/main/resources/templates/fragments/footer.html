@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<footer th:fragment="footer" class="text-white pt-5" style="background: #0e1231">
+
+  <div class="container py-4">
+    <div class="row gy-4">
+
+      <!-- Logo + descripción -->
+      <div class="col-12 col-md-6 col-lg-3">
+        <h5 class="fw-bold mb-3">TECTOONS</h5>
+        <p class="small opacity-75">
+          La plataforma donde artistas y amantes del arte se conectan.
+        </p>
+
+        <div class="d-flex gap-3 fs-5 mt-3">
+          <a href="https://facebook.com" target="_blank" class="text-white opacity-75 hover-opacity">
+            <i class="fab fa-facebook"></i>
+          </a>
+
+          <a href="https://instagram.com" target="_blank" class="text-white opacity-75 hover-opacity">
+            <i class="fab fa-instagram"></i>
+          </a>
+
+          <a href="https://x.com" target="_blank" class="text-white opacity-75 hover-opacity">
+            <i class="fab fa-x-twitter"></i>
+          </a>
+
+          <a href="https://pinterest.com" target="_blank" class="text-white opacity-75 hover-opacity">
+            <i class="fab fa-pinterest"></i>
+          </a>
+
+          <a href="https://tiktok.com" target="_blank" class="text-white opacity-75 hover-opacity">
+            <i class="fab fa-tiktok"></i>
+          </a>
+        </div>
+
+      </div>
+
+      <!-- Explorar -->
+      <div class="col-6 col-md-6 col-lg-3">
+        <h6 class="fw-bold mb-3">EXPLORAR</h6>
+        <ul class="list-unstyled footer-links">
+          <li><a th:href="@{/}" class="footer-link">Inicio</a></li>
+          <li><a th:href="@{/portafolio-obras}" class="footer-link">Portafolio de Obras</a></li>
+          <li><a th:href="@{/lista-artistas}" class="footer-link">Artistas</a></li>
+          <li><a th:href="@{/blog}" class="footer-link">Blog</a></li>
+          <li><a th:href="@{/tienda}" class="footer-link">Tienda</a></li>
+        </ul>
+      </div>
+
+      <!-- Compañía -->
+      <div class="col-6 col-md-6 col-lg-3">
+        <h6 class="fw-bold mb-3">COMPAÑÍA</h6>
+        <ul class="list-unstyled footer-links">
+          <li><a th:href="@{/nosotros}" class="footer-link">Nosotros</a></li>
+          <li><a th:href="@{/contacto}" class="footer-link">Contacto</a></li>
+        </ul>
+
+        <h6 class="fw-bold mb-3 mt-4">AYUDA</h6>
+        <ul class="list-unstyled footer-links">
+          <li><a th:href="@{/preguntas-frecuentes}" class="footer-link">Preguntas Frecuentes</a></li>
+          <li><a th:href="@{/terminos-condiciones}" class="footer-link">Terminos y Condiciones</a></li>
+        </ul>
+      </div>
+
+      <!-- Newsletter -->
+      <div class="col-12 col-md-6 col-lg-3">
+        <h6 class="fw-bold mb-3">SUSCRÍBETE</h6>
+        <p class="small opacity-75">
+          Recibe novedades sobre artistas y productos.
+        </p>
+
+        <form id="suscripcionForm">
+          <div class="input-group">
+            <input type="email" name="email" required class="form-control" placeholder="Tu correo electrónico">
+            <button type="submit" class="btn btn-primary">Suscribirse</button>
+          </div>
+        </form>
+
+        <!-- mensaje de exito -->
+        <p id="mensajeSuscripcion" class="text-success mt-2" style="display:none;">
+          Correo enviado. Muchas gracias.
+        </p>
+      </div>
+
+      <script>
+        document.addEventListener("DOMContentLoaded", () => {
+
+          const form = document.getElementById("suscripcionForm");
+          const mensaje = document.getElementById("mensajeSuscripcion");
+
+          form.addEventListener("submit", async (e) => {
+            e.preventDefault(); // evita recargar o redirigir
+
+            const formData = new FormData(form);
+
+            const response = await fetch("/suscribirse", {
+              method: "POST",
+              body: formData
+            });
+
+            const text = await response.text();
+
+            if (text.includes("ok")) {
+              mensaje.style.display = "block"; // muestra mensaje
+              form.reset(); // limpia el input
+            }
+          });
+
+        });
+      </script>
+
+    </div>
+
+    <!-- Divider -->
+    <div class="border-top border-light mt-4 opacity-25"></div>
+
+    <!-- Derechos reservados -->
+    <div class="text-center mt-4 small opacity-75">
+      &copy; 2025 TecToons. Todos los derechos reservados.
+    </div>
+
+  </div>
+
+</footer>
+
+<!-- Estilos hover modernos -->
+<style>
+  .footer-link {
+    color: #ffffff;
+    text-decoration: none;
+    display: inline-block;
+    margin-bottom: 0.5rem;
+    opacity: 0.75;
+    position: relative;
+    transition: opacity 0.2s ease;
+  }
+
+  .footer-link:hover {
+    opacity: 1;
+  }
+
+  .footer-link::after {
+    content: "";
+    display: block;
+    width: 0%;
+    height: 2px;
+    background: #ffffff;
+    transition: width 0.3s ease;
+  }
+
+  .footer-link:hover::after {
+    width: 100%;
+  }
+
+  .hover-opacity:hover {
+    opacity: 1 !important;
+  }
+</style>
+
+</html>

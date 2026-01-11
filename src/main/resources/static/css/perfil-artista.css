@@ -1,0 +1,39 @@
+body {
+    font-family: 'Poppins', sans-serif;
+}
+
+.banner {
+    height: 220px;
+    background-size: cover;
+    background-position: center;
+    border-top-left-radius: 0.5rem;
+    border-top-right-radius: 0.5rem;
+}
+
+.profile-img {
+    width: 140px;
+    height: 140px;
+    object-fit: cover;
+    border: 4px solid #fff;
+}
+
+.section-title {
+    font-weight: 600;
+    margin-bottom: 0.75rem;
+}
+
+.social-icons a {
+    margin-right: 10px;
+    font-size: 1.2rem;
+    color: #495057;
+    transition: color 0.2s;
+}
+
+.social-icons a:hover {
+    color: #0d6efd;
+}
+
+.info-card {
+    border-radius: 0.75rem;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}

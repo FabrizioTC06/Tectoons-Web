@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Blogs</title>
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+  <link rel="icon" th:href="@{/img/logotectoonsartista2.png}" type="image/png">
+
+  <!-- Bootstrap -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+  <!-- Animate.css -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" th:href="@{/css/styles.css}">
+
+  <style>
+    body {
+      background: #f5f5f5;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+      transition: .3s ease;
+      box-shadow: 0 8px 20px rgba(25, 79, 228, 0.475) !important;
+    }
+
+    .modal-header {
+      background: #192657;
+      color: #fff;
+      border-top-left-radius: 10px;
+      border-top-right-radius: 10px;
+    }
+
+    .modal-content {
+      border-radius: 12px;
+      border: none;
+    }
+
+    #previewImg {
+      border-radius: 10px;
+      max-height: 250px;
+      width: 100%;
+      object-fit: cover;
+      display: none;
+    }
+
+    @keyframes gradientMove {
+      0% {
+        background-position: 0% 50%;
+      }
+
+      50% {
+        background-position: 100% 50%;
+      }
+
+      100% {
+        background-position: 0% 50%;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div th:replace="fragments/navbar-artista :: navbar-artista"></div>
+
+  <!-- ========================= HEADER ========================= -->
+  <header class="text-white text-center py-5 mb-4 shadow-sm" style="
+        background: linear-gradient(135deg, #0a0f2f, #1b2a67, #233785);
+        background-size: 300% 300%;
+        animation: gradientMove 9s ease infinite;
+        border-bottom-left-radius: 20px;
+        border-bottom-right-radius: 20px;
+    ">
+
+    <div class="container">
+      <h1 class="fw-bold display-5 animate_animated animate_fadeInDown" style="letter-spacing: 1px; line-height: 1.2;">
+        Estamos construyendo espacios para que compartas tu arte y conectes con otros creadores
+      </h1>
+
+      <p class="text-white-50 mt-2 animate_animated animate_fadeInUp">
+        Sube, edita y comparte tus novedades
+      </p>
+
+      <th:block th:if="${#authorization.expression('hasAnyAuthority(''ROLE_ARTISTA'',''ROLE_ADMIN'')')}">
+        <button class="btn btn-primary mt-3 px-4 py-2 rounded-pill shadow-sm animate_animated animate_zoomIn"
+          onclick="openCrearModal()" style="background-color:#4b64ff; border:none;">
+          <i class="bi bi-plus-circle"></i> Nuevo dibujo
+        </button>
+      </th:block>
+    </div>
+  </header>
+
+  <!-- ========================= LISTA DE POSTS ========================= -->
+  <div class="container">
+    <div class="row g-4">
+
+      <div class="col-md-6 col-lg-4" th:each="post : ${posts}">
+        <article class="card h-100 shadow-sm border-0">
+
+          <!-- IMAGEN -->
+          <img th:if="${post.imagenUrl != null}" th:src="@{${post.imagenUrl}}" class="card-img-top"
+            style="height: 230px; object-fit: cover;">
+
+          <div class="card-body">
+            <h5 class="fw-bold" th:text="${post.titulo}"></h5>
+            <p class="text-muted small" th:text="${post.contenido}"></p>
+          </div>
+
+          <div class="card-footer bg-white border-0 d-flex justify-content-between pb-3">
+
+            <button class="btn btn-warning btn-sm" th:onclick="'openEditarModal(' + ${post.id} + ');'">
+              <i class="bi bi-pencil-fill"></i> Editar
+            </button>
+
+            <a th:href="@{/artista/mis-posts/eliminar/{id}(id=${post.id})}" class="btn btn-danger btn-sm"
+              onclick="return confirm('¿Eliminar este dibujo?')">
+              <i class="bi bi-trash-fill"></i> Eliminar
+            </a>
+
+          </div>
+
+        </article>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ========================= MODAL ========================= -->
+  <div class="modal fade" id="postModal" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+
+        <div class="modal-header">
+          <h5 class="modal-title" id="modalTitle"></h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+        </div>
+
+        <form id="postForm" method="POST">
+          <div class="modal-body">
+
+            <input type="hidden" id="postId">
+
+            <div class="mb-3">
+              <label class="form-label fw-bold">Título</label>
+              <input type="text" class="form-control" id="titulo" name="titulo" required>
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label fw-bold">Descripción</label>
+              <textarea class="form-control" id="contenido" name="contenido" rows="3" required></textarea>
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label fw-bold">URL de la imagen</label>
+              <input class="form-control" type="url" id="imagenUrl" name="imagenUrl" placeholder="https://...">
+              <small class="text-muted">Debes ingresar un enlace directo a la imagen.</small>
+            </div>
+
+            <img id="previewImg" alt="Vista previa">
+
+          </div>
+
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+            <button type="submit" class="btn btn-primary">
+              <i class="bi bi-check-circle"></i> Guardar
+            </button>
+          </div>
+        </form>
+
+      </div>
+    </div>
+  </div>
+  
+  <!-- Footer -->
+    <div th:replace="fragments/footer :: footer"></div>
+
+  <!-- SCRIPTS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+  <script>
+    // Vista previa imagen
+    document.addEventListener("DOMContentLoaded", () => {
+
+  const imagenInput = document.getElementById("imagenUrl");
+  const previewImg = document.getElementById("previewImg");
+  const postModalEl = document.getElementById("postModal");
+  const modal = new bootstrap.Modal(postModalEl);
+
+  // Vista previa imagen
+  imagenInput.addEventListener("input", () => {
+    const url = imagenInput.value;
+    if (url.trim() !== "") {
+      previewImg.src = url;
+      previewImg.style.display = "block";
+    } else {
+      previewImg.style.display = "none";
+    }
+  });
+
+  // Crear nuevo post
+  window.openCrearModal = function() {
+    document.getElementById("modalTitle").innerText = "Nuevo dibujo";
+    document.getElementById("postForm").action = "/artista/mis-posts/guardar";
+
+    document.getElementById("titulo").value = "";
+    document.getElementById("contenido").value = "";
+    imagenInput.value = "";
+    previewImg.style.display = "none";
+
+    modal.show();
+  };
+
+  // Editar post
+window.openEditarModal = function(id) {
+    fetch("/artista/mis-posts/api/mis-posts/" + id)
+      .then(res => res.json())
+      .then(post => {
+        document.getElementById("modalTitle").innerText = "Editar dibujo";
+        document.getElementById("postForm").action = "/artista/mis-posts/actualizar/" + id;
+
+        document.getElementById("titulo").value = post.titulo || "";
+        document.getElementById("contenido").value = post.contenido || "";
+        document.getElementById("imagenUrl").value = post.imagenUrl || "";
+
+        const previewImg = document.getElementById("previewImg");
+        if (post.imagenUrl) {
+          previewImg.src = post.imagenUrl;
+          previewImg.style.display = "block";
+        } else {
+          previewImg.style.display = "none";
+        }
+
+        new bootstrap.Modal(document.getElementById('postModal')).show();
+      })
+      .catch(err => {
+        console.error("Error al cargar post:", err);
+        alert("No se pudo cargar el post para editar.");
+      });
+};
+
+
+});
+
+
+
+  </script>
+
+
+</body>
+
+</html>
